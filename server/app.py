@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 
 names = ['Nap Time All-Star', "Phil", "Theresa"]
 
@@ -25,6 +25,12 @@ def add_header(req):
 @app.route('/names', methods=['GET'])
 def serve_all_names():
     return jsonify({"results": names})
+
+@app.route('/name', methods=["POST"])
+def add_name():
+    names.append(request.json["item"])
+    print(names)
+    return jsonify(success = True)
 
 if __name__ == "__main__":
     app.run(debug = True)
