@@ -2,7 +2,7 @@
   <div class="hello">
     <h1>{{ title }}</h1>
     <ul>
-      <li v-for="name in names">{{ name }}</li>
+      <li v-for="name in names">{{ name.name }}</li>
     </ul>
     <input v-model="inputValue" />
     <button @click="handleAddNameClick">Add new name</button>

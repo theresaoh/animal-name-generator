@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 
-names = ['Nap Time All-Star', "Phil", "Theresa"]
+names = [{"id": 0, "name": "Nap Time All-Star", "gender": "GN" }]
 
 names_api = Blueprint('names_api', __name__)
 
@@ -10,6 +10,6 @@ def serve_all_names():
 
 @names_api.route('/name', methods=["POST"])
 def add_name():
-    names.append(request.json["item"])
+    names.append({"name": request.json["item"], "id": 0, "gender": "GN"})
     print(names)
     return jsonify(success = True)
