@@ -1,11 +1,12 @@
-from flask import Flask, render_template, jsonify, request
-
-names = ['Nap Time All-Star', "Phil", "Theresa"]
+from flask import Flask, render_template
+from namesAPI import names_api
 
 app = Flask(__name__,
     static_folder = "./dist/static",
     template_folder = "./dist"
-    )
+)
+
+app.register_blueprint(names_api)
 
 @app.route('/')
 def serve_vue_app():
@@ -21,16 +22,6 @@ def add_header(req):
     """
     req.headers["Cache-Control"] = "no-cache"
     return req
-
-@app.route('/names', methods=['GET'])
-def serve_all_names():
-    return jsonify({"results": names})
-
-@app.route('/name', methods=["POST"])
-def add_name():
-    names.append(request.json["item"])
-    print(names)
-    return jsonify(success = True)
 
 if __name__ == "__main__":
     app.run(debug = True)
