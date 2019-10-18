@@ -1,13 +1,39 @@
 <template>
   <div class="hello">
     <h1>{{ title }}</h1>
+    <ul>
+      <li v-for="name in names">{{ name }}</li>
+    </ul>
+    <input v-model="inputValue" />
+    <button @click="handleAddNameClick">Add new name</button>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'NameGenerator',
-  props: ['title']
+  props: ['title'],
+  data() {
+    return {
+      names: ['a', 'b', 'c'],
+      inputValue: ''
+    }
+  },
+  methods: {
+    handleAddNameClick() {
+      axios.post('/name', {item: this.inputValue})
+        .then(() => {
+          axios.get('/names').then( res => this.names = res.data.results);
+        })
+      this.inputValue = '';
+    }
+  },
+  mounted() {
+    axios.get('/names')
+      .then(res => this.names = res.data.results)
+  }
 }
 </script>
 
