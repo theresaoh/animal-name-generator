@@ -1,3 +1,5 @@
 client/node_modules
 server/dist
 .vscode
+server/__pycache__
+Names.csv

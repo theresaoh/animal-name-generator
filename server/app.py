@@ -1,27 +1,41 @@
+import os
 from flask import Flask, render_template
 from namesAPI import names_api
+from sqlalchemy_db_instance import db
+import pandas as pd
 
-app = Flask(__name__,
-    static_folder = "./dist/static",
-    template_folder = "./dist"
-)
 
-app.register_blueprint(names_api)
+project_dir = os.path.dirname(os.path.abspath(__file__))
+project_paths = project_dir.split("/")
+project_paths.pop()
+project_paths.append('db')
+project_dir = "/".join(project_paths)
 
-@app.route('/')
-def serve_vue_app():
-    """
-    Serve our Vue App
-    """
-    return render_template('index.html')
+def create_app():
+    app = Flask(__name__,
+        static_folder = "./dist/static",
+        template_folder = "./dist"
+    )
+    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///{}".format(os.path.join(project_dir, "capstone-names.db"))
+    app.config['SQLALCHEMY_ECHO'] = True
+    db.init_app(app)
+    app.register_blueprint(names_api)
 
-@app.after_request
-def add_header(req):
-    """
-    Clear Cache for hot-reloading
-    """
-    req.headers["Cache-Control"] = "no-cache"
-    return req
+    return app
 
-if __name__ == "__main__":
-    app.run(debug = True)
+def setup_database(app):
+    with app.app_context():
+        db.create_all()
+
+        engine = db.get_engine()
+        csv_file_path = 'Names.csv'
+
+        # Read CSV with Pandas
+        with open(csv_file_path, 'r') as file:
+            df = pd.read_csv(file)
+
+        # Insert to DB
+        df.to_sql('name_table',
+                con=engine,
+                index_label='id',
+                if_exists='replace')
