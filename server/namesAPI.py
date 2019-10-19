@@ -1,4 +1,7 @@
 from flask import Blueprint, jsonify, request
+from sqlalchemy_db_instance import db
+from models import Name
+import pandas as pd
 
 names = [{"id": 0, "name": "Nap Time All-Star", "gender": "GN" }]
 
