@@ -9,7 +9,9 @@ names_api = Blueprint('names_api', __name__)
 
 @names_api.route('/names', methods=['GET'])
 def serve_all_names():
-    return jsonify({"results": names})
+    name_instances = db.session.query(Name).all()
+    name_results = [{"id": name.id, "name": name.AnimalName, "gender": name.Sex} for name in name_instances]
+    return jsonify({"name": name_results})
 
 @names_api.route('/name', methods=["POST"])
 def add_name():
