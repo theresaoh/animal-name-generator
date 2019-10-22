@@ -3,3 +3,5 @@ server/dist
 .vscode
 server/__pycache__
 server/Names.csv
+.DS_Store
+db/
