@@ -32,7 +32,7 @@ export default {
   },
   mounted() {
     axios.get('/names')
-      .then(res => this.names = res.data.results)
+      .then(res =>  this.names = res.data.name)
   }
 }
 </script>
@@ -47,6 +47,7 @@ ul {
   padding: 0;
 }
 li {
+  color: black;
   display: inline-block;
   margin: 0 10px;
 }
