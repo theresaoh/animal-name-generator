@@ -1,8 +1,17 @@
 <template>
   <div class="hello">
     <h1>{{ title }}</h1>
+    <button @click="getFemaleNames">Get Female Names</button>
     <ul>
-      <li v-for="name in names">{{ name.name }}</li>
+      <li v-for="name in this.femaleNamesToDisplay">{{ name.name }}</li>
+    </ul>
+    <button @click="getMaleNames">Get Male Names</button>
+    <ul>
+      <li v-for="name in this.maleNamesToDisplay">{{ name.name }}</li>
+    </ul>
+    <button @click="getGNNames">Get Gender-Neutral Names</button>
+    <ul>
+      <li v-for="name in this.genderNeutralNamesToDisplay">{{ name.name }}</li>
     </ul>
     <input v-model="inputValue" />
     <button @click="handleAddNameClick">Add new name</button>
@@ -18,10 +27,31 @@ export default {
   data() {
     return {
       names: ['a', 'b', 'c'],
+      maleNamesToDisplay: [],
+      femaleNamesToDisplay: [],
+      genderNeutralNamesToDisplay: [],
       inputValue: ''
     }
   },
   methods: {
+    getFemaleNames() {
+      axios.get('/female-names')
+        .then(res =>  {
+          this.femaleNamesToDisplay = res.data.name;
+        })
+    },
+    getMaleNames() {
+      axios.get('/male-names')
+        .then(res =>  {
+          this.maleNamesToDisplay = res.data.name;
+        })
+    },
+    getGNNames() {
+      axios.get('/gender-neutral-names')
+        .then(res =>  {
+          this.genderNeutralNamesToDisplay = res.data.name;
+        })
+    },
     handleAddNameClick() {
       axios.post('/name', {item: this.inputValue})
         .then(() => {
