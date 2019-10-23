@@ -3,15 +3,19 @@
     <h1>{{ title }}</h1>
     <button @click="getFemaleNames">Get Female Names</button>
     <ul>
-      <li v-for="name in this.femaleNamesToDisplay">{{ name.name }}</li>
+      <li @click="setAside(name)" v-for="name in this.femaleNamesToDisplay">{{ name.name }}</li>
     </ul>
     <button @click="getMaleNames">Get Male Names</button>
     <ul>
-      <li v-for="name in this.maleNamesToDisplay">{{ name.name }}</li>
+      <li @click="setAside(name)" v-for="name in this.maleNamesToDisplay">{{ name.name }}</li>
     </ul>
     <button @click="getGNNames">Get Gender-Neutral Names</button>
     <ul>
-      <li v-for="name in this.genderNeutralNamesToDisplay">{{ name.name }}</li>
+      <li @click="setAside(name)" v-for="name in this.genderNeutralNamesToDisplay">{{ name.name }}</li>
+    </ul>
+    <h1>Liked Names</h1>
+    <ul>
+      <li v-for="name in this.setAsideNames">{{ name }}</li>
     </ul>
     <input v-model="inputValue" />
     <button @click="handleAddNameClick">Add new name</button>
@@ -26,6 +30,7 @@ export default {
   props: ['title'],
   data() {
     return {
+      setAsideNames: [],
       names: ['a', 'b', 'c'],
       maleNamesToDisplay: [],
       femaleNamesToDisplay: [],
@@ -34,6 +39,9 @@ export default {
     }
   },
   methods: {
+    setAside(name) {
+      this.setAsideNames.push(name.name);
+    },
     getFemaleNames() {
       axios.get('/female-names')
         .then(res =>  {
