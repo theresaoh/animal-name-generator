@@ -1,17 +1,19 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <NameGenerator title="Name Generator"/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import NameGenerator from './components/NameGenerator.vue'
+import login from './components/login.vue'
 
 export default {
   name: 'app',
   components: {
-    NameGenerator
+    NameGenerator,
+    login
   }
 }
 </script>
