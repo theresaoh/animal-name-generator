@@ -2,12 +2,10 @@ from app import create_app, setup_database
 from flask import render_template
 
 def add_vue_routes(app):
-    @app.route('/')
-    def serve_vue_app():
-        """
-        Serve our Vue App
-        """
-        return(render_template('index.html'))
+    @app.route('/', defaults={'path': ''})
+    @app.route('/<path:path>')
+    def catch_all(path):
+        return render_template("index.html")
 
 
     @app.after_request
