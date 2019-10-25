@@ -1,9 +1,8 @@
 import os
 from flask import Flask, render_template
 from namesAPI import names_api
+from usersAPI import users_api
 from sqlalchemy_db_instance import db
-import pandas as pd
-
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
 project_paths = project_dir.split("/")
@@ -20,22 +19,6 @@ def create_app():
     app.config['SQLALCHEMY_ECHO'] = True
     db.init_app(app)
     app.register_blueprint(names_api)
+    app.register_blueprint(users_api)
 
     return app
-
-def setup_database(app):
-    with app.app_context():
-        db.create_all()
-
-        engine = db.get_engine()
-        csv_file_path = 'Names.csv'
-
-        # Read CSV with Pandas
-        with open(csv_file_path, 'r') as file:
-            df = pd.read_csv(file)
-
-        # Insert to DB
-        df.to_sql('name_table',
-                con=engine,
-                index_label='id',
-                if_exists='replace')
