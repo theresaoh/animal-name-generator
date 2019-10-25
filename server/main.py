@@ -1,4 +1,5 @@
-from app import create_app, setup_database
+from app import create_app
+from models import setup_database
 from flask import render_template
 
 def add_vue_routes(app):
