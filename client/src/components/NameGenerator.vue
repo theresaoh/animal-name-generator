@@ -13,12 +13,22 @@
     <ul>
       <li @click="setAside(name)" v-for="name in this.genderNeutralNamesToDisplay">{{ name.name }}</li>
     </ul>
+    <hr>
     <h1>Liked Names</h1>
     <ul>
       <li v-for="name in this.setAsideNames">{{ name }}</li>
     </ul>
-    <input v-model="inputValue" />
-    <button @click="handleAddNameClick">Add new name</button>
+    <hr>
+    <h1>Add a Name</h1>
+    <input placeholder="Enter Name Here" v-model="inputValue" /><br>
+    <p>This name is typically:</p>
+    <select v-model="addNameGender">
+      <option value="F">Female</option>
+      <option value="M">Male</option>
+      <option value="GN">Gender-Neutral</option>
+    </select>
+    <br><br>
+    <button @click="addName">Add Name</button>
   </div>
 </template>
 
@@ -35,7 +45,8 @@ export default {
       maleNamesToDisplay: [],
       femaleNamesToDisplay: [],
       genderNeutralNamesToDisplay: [],
-      inputValue: ''
+      inputValue: '',
+      addNameGender: ''
     }
   },
   methods: {
@@ -60,12 +71,11 @@ export default {
           this.genderNeutralNamesToDisplay = res.data.name;
         })
     },
-    handleAddNameClick() {
-      axios.post('/name', {item: this.inputValue})
-        .then(() => {
-          axios.get('/names').then( res => this.names = res.data.results);
-        })
+    addName() {
+      this.inputValue = this.inputValue.toUpperCase();
+      axios.post('/name', {AnimalName: this.inputValue, Sex: this.addNameGender})
       this.inputValue = '';
+      this.addNameGender = '';
     }
   },
   mounted() {
