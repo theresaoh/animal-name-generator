@@ -34,12 +34,9 @@ def serve_gender_neutral_names():
 
 @names_api.route('/name', methods=['POST'])
 def add_name():
-    # new_name = Name(AnimalName = request.json["AnimalName"], Sex = request.json["Sex"])
-    i = insert(Name).values(AnimalName = request.json["AnimalName"], Sex = request.json["Sex"])
-    db.engine.execute(i)
-    # new_name = Name()
-    # new_name.AnimalName = request.json["AnimalName"]
-    # new_name.Sex = request.json["Sex"]
-    # db.session.add(new_name)
-    # db.session.commit()
+    new_name = Name()
+    new_name.AnimalName = request.json["AnimalName"]
+    new_name.Sex = request.json["Sex"]
+    db.session.add(new_name)
+    db.session.commit()
     return jsonify(success=True)
