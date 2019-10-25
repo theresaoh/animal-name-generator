@@ -1,10 +1,15 @@
 from sqlalchemy_db_instance import db
+import pandas as pd
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
 
-class Name(db.Model):
+Base = declarative_base()
+
+class Name(Base):
     __tablename__ = 'name_table'
-    id = db.Column(db.Integer, primary_key=True)
-    AnimalName = db.Column(db.String(500))
-    Sex = db.Column(db.String(2))
+    id = Column(Integer, primary_key=True)
+    AnimalName = Column(String(500))
+    Sex = Column(String(2))
 
 class User(db.Model):
     __tablename__ = 'user_table'
