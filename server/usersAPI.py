@@ -12,9 +12,3 @@ def add_user():
     db.session.add(new_user)
     db.session.commit()
     return jsonify(success=True)
-
-@users_api.route('/name', methods=["POST"])
-def add_name():
-    names.append({"name": request.json["item"], "id": 0, "gender": "GN"})
-    print(names)
-    return jsonify(success = True)
