@@ -8,12 +8,14 @@
 <script>
 import NameGenerator from './components/NameGenerator.vue'
 import login from './components/login.vue'
+import register from './components/register.vue'
 
 export default {
   name: 'app',
   components: {
     NameGenerator,
-    login
+    login,
+    register
   }
 }
 </script>

@@ -3,7 +3,8 @@ import Router from 'vue-router'
 
 const routerOptions = [
   { path: '/', component: 'NameGenerator' },
-  { path: '/login', component: 'login' }
+  { path: '/login', component: 'login' },
+  { path: '/register', component: 'register'}
 ]
 const routes = routerOptions.map(route => {
   return {

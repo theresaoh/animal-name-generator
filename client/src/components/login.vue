@@ -4,7 +4,7 @@
     <p>Username:</p><input @click="display(username)" v-model="username" type="text" />
     <p>Password:</p><input type="password" @click="display(password)" v-model="password"/>
     <p>Not yet registered?</p>
-    <button>Register</button>
+    <button @click="display(username)">Register</button>
   </div>
 </template>
 
