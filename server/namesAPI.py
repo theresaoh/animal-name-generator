@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from sqlalchemy import func
+from sqlalchemy import func, insert
 from sqlalchemy_db_instance import db
 from models import Name
 import pandas as pd
