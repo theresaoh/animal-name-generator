@@ -1,15 +1,12 @@
 from sqlalchemy_db_instance import db
 import pandas as pd
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
 
-Base = declarative_base()
-
-class Name(Base):
+class Name(db.Model):
     __tablename__ = 'name_table'
-    id = Column(Integer, primary_key=True)
-    AnimalName = Column(String(500))
-    Sex = Column(String(2))
+    id = db.Column(db.Integer, primary_key=True)
+    AnimalName = db.Column(db.String(500))
+    Sex = db.Column(db.String(2))
 
 class User(db.Model):
     __tablename__ = 'user_table'
@@ -24,9 +21,9 @@ class Favorites(db.Model):
 
 def setup_database(app):
     with app.app_context():
-        engine = db.get_engine()
-        Base.metadata.create_all(engine)
+        db.create_all()
 
+        engine = db.get_engine()
         csv_file_path = 'Names.csv'
 
         # Read CSV with Pandas
