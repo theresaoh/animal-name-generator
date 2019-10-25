@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1>Login</h1>
-    <p>Username:</p><input @click="display(username)" v-model="username" type="text" />
-    <p>Password:</p><input type="password" @click="display(password)" v-model="password"/>
+    <p>Username:</p><input v-model="username" type="text" />
+    <p>Password:</p><input type="password" v-model="password"/>
     <p>Not yet registered?</p>
     <button @click="display(username)">Register</button>
   </div>
@@ -21,9 +21,9 @@ export default {
   },
   methods: {
     display(info) {
-      this.setAsideNames.push(info);
+      console.log(info);
     }
-    }
+  }
 }
 </script>
 
