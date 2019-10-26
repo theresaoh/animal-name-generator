@@ -35,8 +35,14 @@ def serve_gender_neutral_names():
 @names_api.route('/name', methods=['POST'])
 def add_name():
     new_name = Name()
+    new_name.id = determine_next_id()
     new_name.name = request.json["name"]
     new_name.gender = request.json["gender"]
     db.session.add(new_name)
     db.session.commit()
     return jsonify(success=True)
+
+def determine_next_id():
+    max_id = db.session.query(func.max(Name.id)).scalar()
+    result = max_id + 1
+    return result
