@@ -73,7 +73,7 @@ export default {
     },
     addName() {
       this.inputValue = this.inputValue.toUpperCase();
-      axios.post('/name', {AnimalName: this.inputValue, Sex: this.addNameGender})
+      axios.post('/name', {name: this.inputValue, gender: this.addNameGender})
       this.inputValue = '';
       this.addNameGender = '';
     }
