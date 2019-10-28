@@ -40,19 +40,13 @@ export default {
           this.errorMessage = "Login Failed!"
         } else {
           console.log("logged in!")
-          this.$emit('userLoggedIn', this.username)
         }
       });
       this.username = '';
       this.password = '';
       this.errorMessage = '';
+      this.$router.push('/')
     },
-    logout(){
-    axios.post('/logout', {user: this.$parent.userInSession})
-    .then((resp) => {
-      console.log(resp)
-    })
-    }
   }
 }
 </script>

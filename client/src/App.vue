@@ -23,6 +23,17 @@ export default {
     }
   },
   methods: {
+    logout(){
+      axios.post('/logout', {user: this.userInSession})
+      .then((resp) => {
+        this.thereIsAUserInSession = false;
+      })
+      if (this.$route.path == '/'){
+        this.$router.go();
+      } else{
+        this.$router.push('/')
+      }
+    },
     testUserInSession(username) {
       axios.post('/users', {userInSession: username})
       .then((resp) => {
