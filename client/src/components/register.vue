@@ -5,6 +5,8 @@
     <p>Password:</p><input type="password" v-model="password"/>
     <p>Confirm Password:</p><input type="password" v-model="confirmPassword"/><br><br>
     <button @click="addNewUser()">Register</button>
+    <p>Already a registered user?</p>
+    <router-link :to="'/login'"><button>Log In</button></router-link>
   </div>
 </template>
 
