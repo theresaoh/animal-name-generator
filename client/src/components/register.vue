@@ -28,6 +28,7 @@ export default {
       axios.post('/add-user', { username: this.username, password: this.password } )
       this.username = '';
       this.password = '';
+      this.confirmPassword = '';
     }
   }
 }
