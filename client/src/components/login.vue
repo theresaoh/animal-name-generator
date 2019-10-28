@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!this.$parent.userInSession">
+    <!-- <div v-if="!this.$parent.testUserInSession()"> -->
       <h1>Login</h1>
       <p>Username:</p><input v-model="username" type="text" />
       <p>Password:</p><input type="password" v-model="password"/>
@@ -9,11 +9,11 @@
       <button @click="login()">Log In</button>
       <p>Not yet registered?</p>
       <router-link :to="'/register'"><button>Register</button></router-link>
-    </div>
-    <div v-else>
+   <!-- </div> -->
+    <!-- <div v-if="this.$parent.testUserInSession()"> 
       <h1>You're already logged in, {{ this.$parent.userInSession }}</h1>
-      <button @click="logout()">Log Out</button>
-    </div>
+      <button>Log Out</button>
+    </div> -->
   </div>
 </template>
 
