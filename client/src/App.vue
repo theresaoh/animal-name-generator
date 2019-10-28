@@ -1,9 +1,11 @@
 <template>
   <div id="app">
-    <div v-if="this.$route.path == '/'">
+   <div v-if="testUserInSession() == true">
       <router-link :to="'/login'"><button>Log In</button></router-link>
     </div>
-    <login :testUserInSession="testUserInSession" v-on:userLoggedIn="testUserInSession" hidden></login>
+    <div v-if="testUserInSession() == false">
+      <button @click="logout()">Log Out</button>
+   </div>
     <img alt="Vue logo" src="./assets/logo.png">
     <router-view></router-view>
   </div>
@@ -26,24 +28,34 @@ export default {
     logout(){
       axios.post('/logout', {user: this.userInSession})
       .then((resp) => {
-        this.thereIsAUserInSession = false;
       })
       if (this.$route.path == '/'){
         this.$router.go();
-      } else{
+      } else {
         this.$router.push('/')
       }
     },
-    testUserInSession(username) {
-      axios.post('/users', {userInSession: username})
+    consoleTest(){
+      this.testUserInSession().then(function(data){
+        console.log("console test : " + data)
+        return data;
+      })
+    },
+    async testUserInSession(username) {
+      let promise = axios.post('/users')
       .then((resp) => {
         if (resp.data.success == false){
           return false;
         }
         this.userInSession = resp.data.userInSession;
-        console.log(this.userInSession)
         return true;
       })
+      let result = await promise;
+      console.log("result : " + result);
+      // var accessResult = promise.then(function(result) {
+      //   console.log(result);
+      // });
+      return result;
     }
   },
   components: {
@@ -53,6 +65,7 @@ export default {
   },
   mounted() {
     this.testUserInSession();
+    this.consoleTest();
   }
 }
 </script>
