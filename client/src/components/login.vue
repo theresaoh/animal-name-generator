@@ -45,7 +45,8 @@ export default {
       this.username = '';
       this.password = '';
       this.errorMessage = '';
-      this.$router.push('/')
+      this.$router.push('/');
+      this.$router.go();
     },
   }
 }
