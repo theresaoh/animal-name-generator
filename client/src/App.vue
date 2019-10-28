@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-   <div v-if="testUserInSession() == true">
+   <div v-if="!this.loggedIn">
       <router-link :to="'/login'"><button>Log In</button></router-link>
     </div>
-    <div v-if="testUserInSession() == false">
+    <div v-if="this.loggedIn">
       <button @click="logout()">Log Out</button>
    </div>
     <img alt="Vue logo" src="./assets/logo.png">
@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       userInSession: '',
+      loggedIn: false,
     }
   },
   methods: {
@@ -35,27 +36,17 @@ export default {
         this.$router.push('/')
       }
     },
-    consoleTest(){
-      this.testUserInSession().then(function(data){
-        console.log("console test : " + data)
-        return data;
-      })
-    },
     async testUserInSession(username) {
-      let promise = axios.post('/users')
+      let promise = await axios.post('/users')
       .then((resp) => {
         if (resp.data.success == false){
+          this.loggedIn = false;
           return false;
         }
         this.userInSession = resp.data.userInSession;
+        this.loggedIn = true;
         return true;
       })
-      let result = await promise;
-      console.log("result : " + result);
-      // var accessResult = promise.then(function(result) {
-      //   console.log(result);
-      // });
-      return result;
     }
   },
   components: {
@@ -65,7 +56,6 @@ export default {
   },
   mounted() {
     this.testUserInSession();
-    this.consoleTest();
   }
 }
 </script>
