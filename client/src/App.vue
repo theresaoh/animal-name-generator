@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <div v-if="this.$route.path == '/'">
+      <router-link :to="'/login'"><button>Log In</button></router-link>
+    </div>
     <img alt="Vue logo" src="./assets/logo.png">
     <router-view></router-view>
   </div>
