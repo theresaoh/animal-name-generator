@@ -1,27 +1,57 @@
 <template>
   <div>
-    <h1>Login</h1>
-    <p>Username:</p><input v-model="username" type="text" />
-    <p>Password:</p><input type="password" v-model="password"/>
-    <p>Not yet registered?</p>
-    <button @click="display(username)">Register</button>
+    <div v-if="!this.$parent.userInSession">
+      <h1>Login</h1>
+      <p>Username:</p><input v-model="username" type="text" />
+      <p>Password:</p><input type="password" v-model="password"/>
+      <p v-if="this.errorMessage != ''">{{ errorMessage }}</p>
+      <br><br>
+      <button @click="login()">Log In</button>
+      <p>Not yet registered?</p>
+      <router-link :to="'/register'"><button>Register</button></router-link>
+    </div>
+    <div v-else>
+      <h1>You're already logged in, {{ this.$parent.userInSession }}</h1>
+      <button @click="logout()">Log Out</button>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
   name: 'login',
-  props: ['title'],
+  props: {
+    testUserInSession: '',
+  },
   data() {
     return {
       username: '',
       password: '',
+      errorMessage: ''
     }
   },
   methods: {
-    display(info) {
-      console.log(info);
+    login(){
+      axios.post('/login', {username: this.username, password: this.password})
+      .then((resp) => {
+        if (resp.data.success == false){
+          this.errorMessage = "Login Failed!"
+        } else {
+          console.log("logged in!")
+          this.$emit('userLoggedIn', this.username)
+        }
+      });
+      this.username = '';
+      this.password = '';
+      this.errorMessage = '';
+    },
+    logout(){
+    axios.post('/logout', {user: this.$parent.userInSession})
+    .then((resp) => {
+      console.log(resp)
+    })
     }
   }
 }
