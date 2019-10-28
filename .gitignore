@@ -5,3 +5,4 @@ server/__pycache__
 server/Names.csv
 .DS_Store
 db/
+server/secrets.py
