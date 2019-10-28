@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, redirect, session
 from sqlalchemy_db_instance import db
 from models import User
 
@@ -11,4 +11,27 @@ def add_user():
     new_user.password = request.json["password"]
     db.session.add(new_user)
     db.session.commit()
+    return jsonify(success = True)
+
+@users_api.route('/login', methods=["POST"])
+def login():
+    username = request.json['username']
+    password = request.json['password']
+    users = User.query.filter_by(username=username)
+    if users.count() == 1:
+        user = users.first()
+        if password == user.password:
+            session['user'] = user.username
+            return jsonify({"username": user.username})
+    return jsonify(success = False)
+
+@users_api.route('/users', methods=['POST', 'GET'])
+def test_users_in_session():
+    if 'user' in session:
+        return jsonify({"userInSession": session['user']})
+    return jsonify(success=False)
+
+@users_api.route('/logout', methods=['POST', 'GET'])
+def logout():
+    del session['user']
     return jsonify(success=True)
