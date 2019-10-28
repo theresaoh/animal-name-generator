@@ -79,8 +79,9 @@ export default {
     }
   },
   mounted() {
-    axios.get('/names')
-      .then(res =>  this.names = res.data.name)
+    this.getGNNames(),
+    this.getMaleNames(),
+    this.getFemaleNames()
   }
 }
 </script>
