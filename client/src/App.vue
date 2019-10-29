@@ -5,6 +5,7 @@
     </div>
    <div v-if="!this.loggedIn">
       <router-link :to="'/login'"><button>Log In</button></router-link>
+      <router-link :to="'/register'"><button>Register</button></router-link>
     </div>
     <div v-if="this.loggedIn">
       <button @click="logout()">Log Out</button>
@@ -58,9 +59,6 @@ export default {
       })
       let result = await promise;
       console.log("result : " + result);
-      // var accessResult = promise.then(function(result) {
-      //   console.log(result);
-      // });
       return result;
     }
   },
