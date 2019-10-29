@@ -4,7 +4,6 @@
       <h1>Login</h1>
       <p>Username:</p><input v-model="username" type="text" />
       <p>Password:</p><input type="password" v-model="password"/>
-      <p v-if="this.errorMessage != ''">{{ errorMessage }}</p>
       <br><br>
       <button @click="login()">Submit</button>
       <p>Not yet registered?</p>
