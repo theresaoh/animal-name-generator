@@ -37,7 +37,6 @@ export default {
           console.log("failed!");
           this.$router.go();
         } else {
-          console.log(resp);
           console.log("logged in!")
           this.$router.push('/');
           this.$router.go();
