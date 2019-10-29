@@ -30,6 +30,20 @@ export default {
     }
   },
   methods: {
+    login(user, pass){
+      axios.post('/login', {username: user, password: pass})
+      .then((resp) => {
+        if (resp.data.success == false){
+          console.log("failed!");
+          this.$router.go();
+        } else {
+          console.log(resp);
+          console.log("logged in!")
+          this.$router.push('/');
+          this.$router.go();
+        }
+      });
+    },
     logout(){
       axios.post('/logout', {user: this.userInSession})
       .then((resp) => {
