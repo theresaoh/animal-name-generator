@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, redirect, session
+from flask import Blueprint, jsonify, request, session
 from sqlalchemy_db_instance import db
 from models import User
 
