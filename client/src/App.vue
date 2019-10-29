@@ -54,12 +54,6 @@ export default {
         this.$router.push('/')
       }
     },
-    consoleTest(){
-      this.testUserInSession().then(function(data){
-        console.log("console test : " + data)
-        return data;
-      })
-    },
     async testUserInSession(username) {
       let promise = axios.post('/users')
       .then((resp) => {
@@ -83,7 +77,6 @@ export default {
   },
   mounted() {
     this.testUserInSession();
-    this.consoleTest();
   }
 }
 </script>
