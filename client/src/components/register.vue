@@ -14,7 +14,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'login',
+  name: 'register',
   props: ['title'],
   data() {
     return {
