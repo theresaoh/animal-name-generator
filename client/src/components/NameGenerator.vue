@@ -3,15 +3,15 @@
     <h1>{{ title }}</h1>
     <button @click="getFemaleNames">Get Female Names</button>
     <ul>
-      <li @click="setAside(name)" v-for="name in this.femaleNamesToDisplay">{{ name.name }}</li>
+      <li @click="determineClickOrDoubleClick($event, name)" v-for="name in this.femaleNamesToDisplay">{{ name.name }}</li>
     </ul>
     <button @click="getMaleNames">Get Male Names</button>
     <ul>
-      <li @click="setAside(name)" v-for="name in this.maleNamesToDisplay">{{ name.name }}</li>
+      <li @click="determineClickOrDoubleClick($event, name)" v-for="name in this.maleNamesToDisplay">{{ name.name }}</li>
     </ul>
     <button @click="getGNNames">Get Gender-Neutral Names</button>
     <ul>
-      <li @click="setAside(name)" v-for="name in this.genderNeutralNamesToDisplay">{{ name.name }}</li>
+      <li @click="determineClickOrDoubleClick($event, name)" v-for="name in this.genderNeutralNamesToDisplay">{{ name.name }}</li>
     </ul>
     <hr>
     <h1>Liked Names</h1>
@@ -46,10 +46,32 @@ export default {
       femaleNamesToDisplay: [],
       genderNeutralNamesToDisplay: [],
       inputValue: '',
-      addNameGender: ''
+      addNameGender: '',
+      result: '',
+      delay: 300,
+      clicks: 0,
+      timer: null
     }
   },
   methods: {
+    determineClickOrDoubleClick(event, name){
+      this.clicks++ 
+      if (this.clicks === 1) {
+        var self = this;
+        this.timer = setTimeout(() => {
+          this.result = "click"
+          console.log(name.id);
+          self.clicks = 0
+          this.setAside(name);
+          }, this.delay);
+        } else {
+          clearTimeout(this.timer);
+          this.favoriteName(name);
+          this.result = 'Favorited!';
+          console.log(this.result);
+          this.clicks = 0;
+        }        	     
+    },
     setAside(name) {
       this.setAsideNames.push(name.name);
     },
