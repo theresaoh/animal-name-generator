@@ -11,7 +11,7 @@ def add_user():
     new_user.password = request.json["password"]
     db.session.add(new_user)
     db.session.commit()
-    return jsonify(success = True)
+    return jsonify({"username": new_user.username, "password": new_user.password})
 
 @users_api.route('/login', methods=["POST"])
 def login():

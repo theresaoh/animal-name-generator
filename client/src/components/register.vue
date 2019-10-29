@@ -25,10 +25,27 @@ export default {
   },
   methods: {
     addNewUser() {
-      axios.post('/add-user', { username: this.username, password: this.password } )
+      axios.post('/add-user', { username: this.username, password: this.password })
+      .then(resp => {
+        this.login(resp.data.username, resp.data.password)
+      })
       this.username = '';
       this.password = '';
       this.confirmPassword = '';
+    },
+    login(user, pass) {
+      axios.post('/login', {username: user, password: pass})
+      .then((resp) => {
+        if (resp.data.success == false){
+          console.log("failed!");
+          this.$router.go();
+        } else {
+          console.log(resp);
+          console.log("logged in!")
+          this.$router.push('/');
+          this.$router.go();
+        }
+      });
     }
   }
 }
