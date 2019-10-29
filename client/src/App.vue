@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <div v-if="this.$route.path != '/'">
+      <router-link :to="'/'"><button>Home</button></router-link>
+    </div>
    <div v-if="!this.loggedIn">
       <router-link :to="'/login'"><button>Log In</button></router-link>
     </div>
