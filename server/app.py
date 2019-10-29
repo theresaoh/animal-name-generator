@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template
 from namesAPI import names_api
 from usersAPI import users_api
+from favoritesAPI import favorites_api
 from sqlalchemy_db_instance import db
 from secrets import secret_key
 
@@ -22,5 +23,6 @@ def create_app():
     db.init_app(app)
     app.register_blueprint(names_api)
     app.register_blueprint(users_api)
+    app.register_blueprint(favorites_api)
 
     return app
