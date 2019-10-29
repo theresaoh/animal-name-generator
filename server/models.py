@@ -14,9 +14,10 @@ class User(db.Model):
     username = db.Column(db.String(35))
     password = db.Column(db.String(35))
 
-class Favorites(db.Model):
+class Favorite(db.Model):
+    __tablename__ = 'favorite_table'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.String(35), db.ForeignKey('user_table.id'))
+    user_username = db.Column(db.String(35), db.ForeignKey('user_table.username'))
     name_id = db.Column(db.String(35), db.ForeignKey('name_table.id'))
 
 def setup_database(app):

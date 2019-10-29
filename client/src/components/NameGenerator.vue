@@ -75,6 +75,10 @@ export default {
     setAside(name) {
       this.setAsideNames.push(name.name);
     },
+    favoriteName(name){
+      let name_id = name.id
+      axios.post('/favorite-name', {username: this.$parent.userInSession, name_id: name_id})
+    },
     getFemaleNames() {
       axios.get('/female-names')
         .then(res =>  {
