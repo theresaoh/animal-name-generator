@@ -28,24 +28,13 @@ export default {
     return {
       username: '',
       password: '',
-      errorMessage: ''
     }
   },
   methods: {
     login(){
-      axios.post('/login', {username: this.username, password: this.password})
-      .then((resp) => {
-        if (resp.data.success == false){
-          this.errorMessage = "Login Failed!"
-        } else {
-          console.log("logged in!")
-          this.$router.push('/');
-          this.$router.go();
-        }
-      });
+      this.$parent.login(this.username, this.password);
       this.username = '';
       this.password = '';
-      this.errorMessage = '';
     },
     logout(){
       this.$parent.logout();
