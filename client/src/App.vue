@@ -72,17 +72,11 @@ export default {
         return true;
       })
       let result = await promise;
-      console.log("result : " + result);
       return result;
     }
   },
-  components: {
-    NameGenerator,
-    login,
-    register
-  },
   mounted() {
-    this.testUserInSession();
+    this.testUserInSession()
   }
 }
 </script>

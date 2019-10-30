@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div>
     <h1>{{ title }}</h1>
     <button @click="getFemaleNames">Get Female Names</button>
     <ul>
@@ -67,7 +67,7 @@ export default {
         } else {
           clearTimeout(this.timer);
           this.favoriteName(name);
-          this.result = 'Favorited!';
+          this.result = 'Favorited';
           console.log(this.result);
           this.clicks = 0;
         }        	     
