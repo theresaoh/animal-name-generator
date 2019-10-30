@@ -19,10 +19,17 @@
 import NameGenerator from './components/NameGenerator.vue'
 import login from './components/login.vue'
 import register from './components/register.vue'
+import favorites from './components/favorites.vue'
 import axios from 'axios'
 
 export default {
   name: 'app',
+  components: {
+    NameGenerator,
+    login,
+    register,
+    favorites
+  },
   data() {
     return {
       userInSession: '',
