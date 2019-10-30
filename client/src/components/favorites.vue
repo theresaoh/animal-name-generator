@@ -1,9 +1,26 @@
 <template>
   <div>
     <h1>Favorited Names</h1>
-    <ul>
-        <li v-for="name in namesToDisplay">{{ name.favorited_name }}</li>
-    </ul>
+    <div class="favorited-names">
+    <div class="fav-female-names">
+        <h2>Female Names</h2>
+        <ul  v-for="name in namesToDisplay" v-if="name.name_gender == 'F'">
+            <li>{{ name.favorited_name }}</li>
+        </ul>
+    </div>
+    <div class="fav-male-names">
+        <h2>Male Names</h2>
+        <ul  v-for="name in namesToDisplay" v-if="name.name_gender == 'M'">
+            <li>{{ name.favorited_name }}</li>
+        </ul>
+    </div>
+    <div class="fav-gn-name">
+        <h2>Gender-Neutral Names</h2>
+        <ul  v-for="name in namesToDisplay" v-if="name.name_gender =='GN'">
+            <li>{{ name.favorited_name }}</li>
+        </ul>
+    </div>
+    </div>
   </div>
 </template>
 
@@ -44,6 +61,11 @@ li {
   color: black;
   display: inline-block;
   margin: 0 10px;
+}
+.favorited-names{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 a {
   color: #42b983;
