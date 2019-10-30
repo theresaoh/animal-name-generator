@@ -19,6 +19,8 @@ class Favorite(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_username = db.Column(db.String(35), db.ForeignKey('user_table.username'))
     name_id = db.Column(db.String(35), db.ForeignKey('name_table.id'))
+    favorited_name = db.Column(db.String(40))
+    name_gender = db.Column(db.String(2))
 
 def setup_database(app):
     with app.app_context():
