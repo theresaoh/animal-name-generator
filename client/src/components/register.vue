@@ -21,7 +21,6 @@ import axios from 'axios';
 
 export default {
   name: 'register',
-  props: ['title'],
   data() {
     return {
       username: '',
@@ -43,11 +42,9 @@ export default {
       axios.post('/login', {username: user, password: pass})
       .then((resp) => {
         if (resp.data.success == false){
-          console.log("failed!");
           this.$router.go();
         } else {
-          console.log(resp);
-          console.log("logged in!")
+          this.$router.push('/')
           this.$router.push('/');
           this.$router.go();
         }
