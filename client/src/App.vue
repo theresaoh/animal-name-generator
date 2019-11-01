@@ -1,15 +1,18 @@
 <template>
   <div id="app">
-    <div v-if="this.$route.path != '/'">
-      <router-link :to="'/'"><button>Home</button></router-link>
-    </div>
-   <div v-if="!this.loggedIn">
-      <router-link :to="'/login'"><button>Log In</button></router-link>
-      <router-link :to="'/register'"><button>Register</button></router-link>
-    </div>
-    <div v-if="this.loggedIn">
-      <button @click="logout()">Log Out</button>
-   </div>
+    <div class="nav-bar">
+      <div v-if="this.$route.path != '/'">
+        <router-link :to="'/'"><button>Home</button></router-link>
+      </div>
+      <div v-if="!this.loggedIn">
+        <router-link :to="'/login'"><button>Log In</button></router-link>
+        <router-link :to="'/register'"><button>Register</button></router-link>
+      </div>
+      <div v-if="this.loggedIn">
+          <button @click="logout()">Log Out</button>
+      </div>
+    <router-link :to="'/favorites'"><button>Favorites</button></router-link>
+  </div>
     <img alt="Vue logo" src="./assets/logo.png">
     <router-view></router-view>
   </div>
@@ -89,5 +92,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.nav-bar{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 </style>
