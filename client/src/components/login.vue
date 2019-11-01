@@ -20,9 +20,6 @@ import axios from 'axios';
 
 export default {
   name: 'login',
-  props: {
-    testUserInSession: '',
-  },
   data() {
     return {
       username: '',
@@ -34,10 +31,6 @@ export default {
       this.$parent.login(this.username, this.password);
       this.username = '';
       this.password = '';
-    },
-    logout(){
-      this.$parent.logout();
-      this.$router.push('/')
     }
   }
 }
