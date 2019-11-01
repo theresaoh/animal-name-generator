@@ -4,6 +4,13 @@ from models import User
 
 users_api = Blueprint('users_api', __name__)
 
+@users_api.route('/duplicate-user-test', methods=["POST"])
+def test_duplicate_user():
+    username = request.json["username"]
+    user_in_db = db.session.query(User).filter(User.username == username).all()
+    user_in_db_results = [{"id": user.id, "user_username": user.username} for user in user_in_db]
+    return jsonify({"does_the_user_exist": user_in_db_results})
+
 @users_api.route('/add-user', methods=["POST"])
 def add_user():
     new_user = User()

@@ -25,14 +25,30 @@ export default {
     return {
       username: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      errorMessage: ''
     }
   },
   methods: {
+    testDuplicateUser(){
+      axios.post('/duplicate-user-test', { username: this.username })
+      .then(resp => {
+        console.log(resp.data.does_the_user_exist.length)
+        if (resp.data.does_the_user_exist.length == 0){
+          this.addNewUser();
+        } else {
+          this.errorMessage = "Sorry, that username already exists."
+          this.username = '';
+          this.password = '';
+          this.confirmPassword = '';
+        }
+      })
+    },
     addNewUser() {
       axios.post('/add-user', { username: this.username, password: this.password })
       .then(resp => {
-        this.login(resp.data.username, resp.data.password)
+        console.log(resp);
+        this.login(resp.data.username, resp.data.password);
       })
       this.username = '';
       this.password = '';
@@ -70,5 +86,9 @@ li {
 }
 a {
   color: #42b983;
+}
+.error-message{
+  color: red;
+  font-weight: bold;
 }
 </style>
