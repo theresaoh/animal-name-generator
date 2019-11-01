@@ -5,19 +5,19 @@
     <div class="fav-female-names">
         <h2>Female Names</h2>
         <ul  v-for="name in namesToDisplay" v-if="name.name_gender == 'F'">
-            <li>{{ name.favorited_name }}</li>
+            <li @click="determineClickOrDoubleClick($event, name)">{{ name.favorited_name }}</li>
         </ul>
     </div>
     <div class="fav-male-names">
         <h2>Male Names</h2>
         <ul  v-for="name in namesToDisplay" v-if="name.name_gender == 'M'">
-            <li>{{ name.favorited_name }}</li>
+            <li @click="determineClickOrDoubleClick($event, name)">{{ name.favorited_name }}</li>
         </ul>
     </div>
     <div class="fav-gn-name">
         <h2>Gender-Neutral Names</h2>
         <ul  v-for="name in namesToDisplay" v-if="name.name_gender =='GN'">
-            <li>{{ name.favorited_name }}</li>
+            <li @click="determineClickOrDoubleClick($event, name)">{{ name.favorited_name }}</li>
         </ul>
     </div>
     </div>
@@ -31,10 +31,27 @@ export default {
   name: 'favorites',
   data() {
     return {
-        namesToDisplay: ''
+        namesToDisplay: '',
+        delay: 300,
+        clicks: 0,
+        timer: null
     }
   },
   methods: {
+    determineClickOrDoubleClick(event, name){
+      this.clicks++ 
+      if (this.clicks === 1) {
+        var self = this;
+        this.timer = setTimeout(() => {
+          self.clicks = 0
+          }, this.delay);
+        } else {
+          clearTimeout(this.timer);
+          axios.post('/remove-favorite', {id: name.id})
+          this.clicks = 0;
+          this.$router.go();
+        }        	     
+    },
     getFavoritedNames() {
         axios.get('/favorited-names')
             .then((resp) => {
