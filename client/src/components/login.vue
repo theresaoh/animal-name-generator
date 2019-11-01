@@ -10,8 +10,7 @@
       <router-link :to="'/register'"><button>Register</button></router-link>
     </div>
     <div v-if="this.$parent.loggedIn"> 
-      <h1>You're already logged in, {{ this.$parent.userInSession }}</h1>
-      <button @click="logout()">Log Out</button>
+      <h1>You're already logged in.</h1>
     </div>
   </div>
 </template>

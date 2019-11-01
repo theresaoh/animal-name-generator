@@ -1,12 +1,18 @@
 <template>
   <div>
-    <h1>Register</h1>
-    <p>Username:</p><input v-model="username" type="text" />
-    <p>Password:</p><input type="password" v-model="password"/>
-    <p>Confirm Password:</p><input type="password" v-model="confirmPassword"/><br><br>
-    <button @click="addNewUser()">Register</button>
-    <p>Already a registered user?</p>
-    <router-link :to="'/login'"><button>Log In</button></router-link>
+    <div v-if="this.$parent.loggedIn == false">
+      <h1>Register</h1>
+      <p>Username:</p><input v-model="username" type="text" />
+      <p>Password:</p><input type="password" v-model="password"/>
+      <p>Confirm Password:</p><input type="password" v-model="confirmPassword"/><br><br>
+      <div class="error-message">{{ errorMessage }}</div>
+      <button @click="testDuplicateUser()">Register</button>
+      <p>Already a registered user?</p>
+      <router-link :to="'/login'"><button>Log In</button></router-link>
+      </div>
+    <div v-else>
+    <h1>You're already logged in.</h1>
+    </div>
   </div>
 </template>
 
