@@ -21,3 +21,11 @@ def serve_favorited_names():
     favorite_instances = db.session.query(Favorite).filter(Favorite.user_username == username).all()
     favorite_results = [{"id": favorite.id, "user_username": favorite.user_username, "name_id": favorite.name_id, "favorited_name": favorite.favorited_name, "name_gender": favorite.name_gender} for favorite in favorite_instances]
     return jsonify({"favorites": favorite_results})
+
+@favorites_api.route('/remove-favorite', methods=['POST'])
+def remove_favorite():
+    name_id = request.json['id']
+    favorited_name = db.session.query(Favorite).filter(Favorite.id == name_id).one()
+    db.session.delete(favorited_name)
+    db.session.commit()
+    return jsonify(success = True)
