@@ -75,6 +75,7 @@ export default {
         return true;
       })
       let result = await promise;
+      console.log(result);
       return result;
     }
   },
