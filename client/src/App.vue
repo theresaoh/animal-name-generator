@@ -42,6 +42,10 @@ export default {
     }
   },
   methods: {
+    goHomeAndRefresh() {
+      this.$router.push('/');
+      this.$router.go();
+    },
     login(user, pass){
       axios.post('/login', {username: user, password: pass})
       .then((resp) => {
@@ -49,9 +53,7 @@ export default {
           console.log("failed!");
           this.$router.go();
         } else {
-          console.log("logged in!")
-          this.$router.push('/');
-          this.$router.go();
+          this.goHomeAndRefresh();
         }
       });
     },
@@ -62,7 +64,7 @@ export default {
       if (this.$route.path == '/'){
         this.$router.go();
       } else {
-        this.$router.push('/')
+        this.goHomeAndRefresh();
       }
     },
     async testUserInSession(username) {
