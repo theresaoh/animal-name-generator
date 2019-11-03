@@ -54,6 +54,13 @@ export default {
     }
   },
   methods: {
+    nameAlreadySetAside(name){
+      if (!this.setAsideNames.includes(name.name)){
+        this.setAside(name);
+      } else {
+        return false;
+      }
+    },
     determineClickOrDoubleClick(event, name){
       this.clicks++ 
       if (this.clicks === 1) {
@@ -62,7 +69,7 @@ export default {
           this.result = "click"
           console.log(name.id);
           self.clicks = 0
-          this.setAside(name);
+          this.nameAlreadySetAside(name);
           }, this.delay);
         } else {
           clearTimeout(this.timer);
