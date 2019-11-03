@@ -4,15 +4,17 @@
       <div v-if="this.$route.path != '/'">
         <router-link :to="'/'"><button>Home</button></router-link>
       </div>
-      <div v-if="!this.loggedIn">
+      <div v-if="this.displayLoginRegisterButtons">
         <router-link :to="'/login'"><button>Log In</button></router-link>
         <router-link :to="'/register'"><button>Register</button></router-link>
+      </div>
+      <div v-if="this.displayFavoritesButton">
+        <router-link :to="'/favorites'"><button>Favorites</button></router-link>
       </div>
       <div v-if="this.loggedIn">
           <button @click="logout()">Log Out</button>
       </div>
-    <router-link :to="'/favorites'"><button>Favorites</button></router-link>
-  </div>
+    </div>
     <img alt="Vue logo" src="./assets/logo.png">
     <router-view></router-view>
   </div>
@@ -77,6 +79,22 @@ export default {
       let result = await promise;
       console.log(result);
       return result;
+    }
+  },
+    computed: {
+    displayLoginRegisterButtons(){
+      if (this.$route.path != '/login' && !this.loggedIn){
+        return true;
+      } else {
+        return false;
+      }
+    },
+    displayFavoritesButton(){
+      if (this.loggedIn && this.$route.path != '/favorites'){
+        return true;
+      } else {
+        return false;
+      }
     }
   },
   mounted() {
