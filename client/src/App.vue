@@ -8,9 +8,7 @@
         <router-link class="nav-bar-elem" :to="'/login'"><button>Log In</button></router-link>
         <router-link class="nav-bar-elem" :to="'/register'"><button>Register</button></router-link>
       </div>
-      <div v-if="this.displayFavoritesButton">
         <router-link class="nav-bar-elem" :to="'/favorites'"><button>Favorites</button></router-link>
-      </div>
       <div v-if="this.loggedIn">
           <button class="nav-bar-elem" @click="logout()">Log Out</button>
       </div>
@@ -85,13 +83,6 @@ export default {
     computed: {
     displayLoginRegisterButtons(){
       if (this.$route.path != '/login' && !this.loggedIn){
-        return true;
-      } else {
-        return false;
-      }
-    },
-    displayFavoritesButton(){
-      if (this.loggedIn && this.$route.path != '/favorites'){
         return true;
       } else {
         return false;
