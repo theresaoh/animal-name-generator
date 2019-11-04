@@ -1,18 +1,26 @@
 <template>
   <div>
-    <h1>{{ title }}</h1>
-    <button @click="getFemaleNames">Get Female Names</button>
-    <ul>
-      <li @click="determineClickOrDoubleClick($event, name)" v-for="name in this.femaleNamesToDisplay">{{ name.name }}</li>
-    </ul>
-    <button @click="getMaleNames">Get Male Names</button>
-    <ul>
-      <li @click="determineClickOrDoubleClick($event, name)" v-for="name in this.maleNamesToDisplay">{{ name.name }}</li>
-    </ul>
-    <button @click="getGNNames">Get Gender-Neutral Names</button>
-    <ul>
-      <li @click="determineClickOrDoubleClick($event, name)" v-for="name in this.genderNeutralNamesToDisplay">{{ name.name }}</li>
-    </ul>
+    <h1>Animal Name Generator</h1>
+    <div class="name-generation">
+      <div class="name-container">
+        <button @click="getFemaleNames">Get Female Names</button>
+        <ul>
+          <li @click="determineClickOrDoubleClick($event, name)" v-for="name in this.femaleNamesToDisplay">{{ name.name }}<br></li>
+        </ul>
+      </div>
+      <div class="name-container">
+        <button @click="getMaleNames">Get Male Names</button>
+        <ul>
+          <li @click="determineClickOrDoubleClick($event, name)" v-for="name in this.maleNamesToDisplay">{{ name.name }}<br></li>
+        </ul>
+      </div>
+      <div class="name-container">
+        <button @click="getGNNames">Get Gender-Neutral Names</button>
+        <ul>
+          <li @click="determineClickOrDoubleClick($event, name)" v-for="name in this.genderNeutralNamesToDisplay">{{ name.name }}<br></li>
+        </ul>
+      </div>
+    </div>
     <hr>
     <h1>Liked Names</h1>
     <ul>
@@ -31,7 +39,6 @@
     <div class="success-message">{{ successMessage }}</div>
     <br><br>
     <button @click="this.testDuplicateNameInDB">Add Name</button>
-    <br><br><br>
   </div>
 </template>
 
@@ -40,7 +47,6 @@ import axios from 'axios';
 
 export default {
   name: 'NameGenerator',
-  props: ['title'],
   data() {
     return {
       setAsideNames: [],
@@ -153,11 +159,19 @@ ul {
 }
 li {
   color: black;
-  display: inline-block;
-  margin: 0 10px;
+  margin: 5px 10px;
 }
 a {
   color: #42b983;
+}
+.name-generation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.name-container {
+  border: 2px solid black;
+  width: 15em;
 }
 .error-message {
   color: red;
