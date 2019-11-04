@@ -25,7 +25,7 @@
     </div>
     <div v-if="!this.$parent.loggedIn">
         <h1>Sorry, you must be logged in to view your favorited names.</h1>
-        <h2>Registering and logging in gives you the ability to favorite the names you like the best and view them at any time, like this:</h2>
+        <h2>Registering and logging in gives you the ability to favorite the names you like the most and view them at any time, like this:</h2>
         <br>
         <hr>
         <div class="favorited-names">
