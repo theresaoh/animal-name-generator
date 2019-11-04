@@ -21,11 +21,13 @@
         </ul>
       </div>
     </div>
-    <hr>
-    <h1>Liked Names</h1>
-    <ul>
-      <li v-for="name in this.setAsideNames">{{ name }}</li>
-    </ul>
+    <div v-if="this.setAsideNames.length > 0">
+      <hr>
+      <h1>Liked Names</h1>
+      <ul>
+        <li class="liked-names" v-for="name in this.setAsideNames">{{ name }}</li>
+      </ul>
+    </div>
     <hr>
     <h1>Add a Name</h1>
     <input placeholder="Enter Name Here" v-model="inputValue" /><br>
@@ -180,5 +182,9 @@ a {
 .success-message {
   color: green;
   font-weight: bold;
+}
+.liked-names {
+  display: inline-block;
+
 }
 </style>
