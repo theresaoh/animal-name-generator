@@ -1,25 +1,54 @@
 <template>
   <div>
-    <h1>Favorited Names</h1>
-    <div class="favorited-names">
-    <div class="fav-female-names">
-        <h2>Female Names</h2>
-        <ul  v-for="name in namesToDisplay" v-if="name.name_gender == 'F'">
-            <li @click="determineClickOrDoubleClick($event, name)">{{ name.favorited_name }}</li>
-        </ul>
+    <div v-if="this.$parent.loggedIn">
+        <h1>Favorited Names</h1>
+        <div class="favorited-names">
+            <div class="fav-female-names">
+                <h2>Female Names</h2>
+                <ul  v-for="name in namesToDisplay" v-if="name.name_gender == 'F'">
+                    <li @click="determineClickOrDoubleClick($event, name)">{{ name.favorited_name }}</li>
+                </ul>
+            </div>
+            <div class="fav-male-names">
+                <h2>Male Names</h2>
+                <ul  v-for="name in namesToDisplay" v-if="name.name_gender == 'M'">
+                    <li @click="determineClickOrDoubleClick($event, name)">{{ name.favorited_name }}</li>
+                </ul>
+            </div>
+            <div class="fav-gn-name">
+                <h2>Gender-Neutral Names</h2>
+                <ul  v-for="name in namesToDisplay" v-if="name.name_gender =='GN'">
+                    <li @click="determineClickOrDoubleClick($event, name)">{{ name.favorited_name }}</li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="fav-male-names">
-        <h2>Male Names</h2>
-        <ul  v-for="name in namesToDisplay" v-if="name.name_gender == 'M'">
-            <li @click="determineClickOrDoubleClick($event, name)">{{ name.favorited_name }}</li>
-        </ul>
-    </div>
-    <div class="fav-gn-name">
-        <h2>Gender-Neutral Names</h2>
-        <ul  v-for="name in namesToDisplay" v-if="name.name_gender =='GN'">
-            <li @click="determineClickOrDoubleClick($event, name)">{{ name.favorited_name }}</li>
-        </ul>
-    </div>
+    <div v-if="!this.$parent.loggedIn">
+        <h1>Sorry, you must be logged in to view your favorited names.</h1>
+        <h2>Registering and logging in gives you the ability to favorite the names you like the best and view them at any time, like this:</h2>
+        <br>
+        <hr>
+        <div class="favorited-names">
+            <div>
+                <h2>Female Names</h2>
+                <ul  v-for="name in demoFemaleNames">
+                        <li>{{ name }}</li>
+                    </ul>
+                </div>
+                <div class="fav-male-names">
+                    <h2>Male Names</h2>
+                    <ul  v-for="name in demoMaleNames">
+                        <li>{{ name }}</li>
+                    </ul>
+                </div>
+                <div class="fav-gn-name">
+                    <h2>Gender-Neutral Names</h2>
+                    <ul  v-for="name in demoGNNames">
+                        <li>{{ name }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
   </div>
 </template>
@@ -34,7 +63,10 @@ export default {
         namesToDisplay: '',
         delay: 300,
         clicks: 0,
-        timer: null
+        timer: null,
+        demoFemaleNames: ["Bella", "Luna", "Fluffy"],
+        demoMaleNames: ["Rex", "Sparky", "Bruno"],
+        demoGNNames: ["Socks", "Chowder", "Snuggles"]
     }
   },
   methods: {
