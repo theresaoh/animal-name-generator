@@ -72,6 +72,10 @@ export default {
           this.nameAlreadySetAside(name);
           }, this.delay);
         } else {
+          if (!this.$parent.loggedIn){
+            console.log("Sorry, you have to be logged in to favorite names");
+            return;
+          }
           clearTimeout(this.timer);
           this.favoriteName(name);
           this.result = 'Favorited';
