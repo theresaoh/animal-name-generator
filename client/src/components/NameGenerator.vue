@@ -61,6 +61,7 @@ export default {
   methods: {
     testDuplicateNameInDB(){
       this.successMessage = '';
+      this.duplicateNameErrorMessage = '';
       axios.post('/duplicate-name-test', { name: this.inputValue, gender: this.addNameGender })
       .then(resp => {
         console.log(resp.data.does_the_name_exist.length)
