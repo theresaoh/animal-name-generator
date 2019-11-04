@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Animal Name Generator</h1>
+    <h4>Click on a name to set it aside. Any names set aside will be erased on page refresh. Double-click to favorite a name to view later. You must be logged in to favorite names</h4>
     <div class="name-generation">
       <div class="name-container">
         <button @click="getFemaleNames">Get Female Names</button>
