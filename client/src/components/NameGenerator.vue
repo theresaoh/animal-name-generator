@@ -27,8 +27,11 @@
       <option value="M">Male</option>
       <option value="GN">Gender-Neutral</option>
     </select>
+    <div class="error-message">{{ duplicateNameErrorMessage }}</div>
+    <div class="success-message">{{ successMessage }}</div>
     <br><br>
-    <button @click="addName">Add Name</button>
+    <button @click="this.testDuplicateNameInDB">Add Name</button>
+    <br><br><br>
   </div>
 </template>
 
@@ -47,6 +50,8 @@ export default {
       genderNeutralNamesToDisplay: [],
       inputValue: '',
       addNameGender: '',
+      duplicateNameErrorMessage: '',
+      successMessage: '',
       result: '',
       delay: 300,
       clicks: 0,
@@ -54,6 +59,19 @@ export default {
     }
   },
   methods: {
+    testDuplicateNameInDB(){
+      this.successMessage = '';
+      axios.post('/duplicate-name-test', { name: this.inputValue, gender: this.addNameGender })
+      .then(resp => {
+        console.log(resp.data.does_the_name_exist.length)
+        if (resp.data.does_the_name_exist.length == 0){
+          this.addName();
+        } else {
+          this.duplicateNameErrorMessage = "That name already exists in the database."
+          this.inputValue = '';
+        }
+      })
+    },
     nameAlreadySetAside(name){
       if (!this.setAsideNames.includes(name.name)){
         this.setAside(name);
@@ -110,6 +128,7 @@ export default {
     addName() {
       this.inputValue = this.inputValue.toUpperCase();
       axios.post('/name', {name: this.inputValue, gender: this.addNameGender})
+      this.successMessage = "You've added that name to the database!";
       this.inputValue = '';
       this.addNameGender = '';
     }
@@ -138,5 +157,13 @@ li {
 }
 a {
   color: #42b983;
+}
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+.success-message {
+  color: green;
+  font-weight: bold;
 }
 </style>
