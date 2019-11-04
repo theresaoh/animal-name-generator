@@ -2,20 +2,19 @@
   <div id="app">
     <div class="nav-bar">
       <div v-if="this.$route.path != '/'">
-        <router-link :to="'/'"><button>Home</button></router-link>
+        <router-link class="nav-bar-elem" :to="'/'"><button>Home</button></router-link>
       </div>
       <div v-if="this.displayLoginRegisterButtons">
-        <router-link :to="'/login'"><button>Log In</button></router-link>
-        <router-link :to="'/register'"><button>Register</button></router-link>
+        <router-link class="nav-bar-elem" :to="'/login'"><button>Log In</button></router-link>
+        <router-link class="nav-bar-elem" :to="'/register'"><button>Register</button></router-link>
       </div>
       <div v-if="this.displayFavoritesButton">
-        <router-link :to="'/favorites'"><button>Favorites</button></router-link>
+        <router-link class="nav-bar-elem" :to="'/favorites'"><button>Favorites</button></router-link>
       </div>
       <div v-if="this.loggedIn">
-          <button @click="logout()">Log Out</button>
+          <button class="nav-bar-elem" @click="logout()">Log Out</button>
       </div>
     </div>
-    <img alt="Vue logo" src="./assets/logo.png">
     <router-view></router-view>
   </div>
 </template>
@@ -107,6 +106,7 @@ export default {
 
 <style>
 #app {
+  margin: 10%;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -114,9 +114,12 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-.nav-bar{
+.nav-bar {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+.nav-bar-elem {
+  margin: 0 10px;
 }
 </style>
