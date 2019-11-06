@@ -115,17 +115,16 @@ export default {
 }
 button {
   color: #2c3e50 !important;
-  background-color: #b2c6a1 !important;
+  background-color: #c9dbba !important;
   text-transform: uppercase;
-  background: #ffffff;
   padding: 5px;
-  border: 4px solid #2c3e50 !important;
+  border: 2px solid #2c3e50 !important;
   border-radius: 6px;
   display: inline-block;
   transition: all 0.3s ease 0s;
 }
 button:hover {
-  background-color: #7d996e !important;
+  background-color: #b2c6a1 !important;
   color: #2c3e50 !important;
   border-radius: 50px;
   border-color: #2c3e50 !important;

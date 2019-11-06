@@ -1,7 +1,7 @@
 <template>
   <div class="contents">
     <h1>Animal Name Generator</h1>
-    <h4>Click on a name to set it aside. Any names set aside will be erased on page refresh.<br>Double-click to favorite a name to view later. You must be logged in to favorite names.</h4>
+    <h4><b>Click</b> on a name to set it aside. Any names set aside will be erased on page refresh.<br><b>Double-click</b> to favorite a name to view later. You must be logged in to favorite names.</h4>
     <div class="name-generation">
       <div class="name-container">
         <button @click="getFemaleNames">Get Female Names</button>
@@ -158,6 +158,9 @@ body {
 h3 {
   margin: 40px 0 0;
 }
+h4 {
+  font-weight: normal;
+}
 .liked-title {
   color: #a15655;
 }
@@ -168,9 +171,10 @@ ul {
 li {
   color: #2c3e50;;
   margin: 5px 10px;
+  font-weight: bold;
 }
 .generated-names:hover {
-  font-weight: bold;
+  font-weight: normal;
 }
 a {
   color: #42b983;
@@ -181,7 +185,7 @@ a {
   justify-content: space-around;
 }
 .name-container {
-  border: 2px solid #2c3e50;
+  border: 1px solid #2c3e50;
   padding-top: 10px;
   width: 15em;
 }
@@ -195,6 +199,6 @@ a {
 }
 .liked-names {
   display: inline-block;
-
+  font-weight: normal;
 }
 </style>
