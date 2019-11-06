@@ -40,9 +40,6 @@ export default {
       this.passwordMatchErrorMessage = '';
       const capitalLetters = /[A-Z]/
       const specialChracters = /\W/
-      console.log(capitalLetters.test(this.password));
-      console.log(specialChracters.test(this.password));
-      console.log(this.password.length >=7);
       if (!capitalLetters.test(this.password) || !specialChracters.test(this.password) || !this.password.length >= 7){
         this.passwordRequirementsErrorMessage = "Passwords must be at least 5 characters long and include at least one capital letter and one special character";
         return;
@@ -56,7 +53,6 @@ export default {
     testDuplicateUser(){
       axios.post('/duplicate-user-test', { username: this.username })
       .then(resp => {
-        console.log(resp.data.does_the_user_exist.length)
         if (resp.data.does_the_user_exist.length == 0){
           this.passwordMeetsRequirements();
         } else {
@@ -70,7 +66,6 @@ export default {
     addNewUser() {
       axios.post('/add-user', { username: this.username, password: this.password })
       .then(resp => {
-        console.log(resp);
         this.login(resp.data.username, resp.data.password);
       })
       this.username = '';
@@ -80,7 +75,6 @@ export default {
     login(user, pass) {
       axios.post('/login', {username: user, password: pass})
       .then((resp) => {
-        console.log(resp);
         if (resp.data.success == false){
           this.$router.go();
         } else {
