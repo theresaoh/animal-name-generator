@@ -78,6 +78,7 @@ export default {
         if (resp.data.success == false){
           this.$router.go();
         } else {
+          this.$parent.loggedIn = true;
           this.$router.push('/');
         }
       });
