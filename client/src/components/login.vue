@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login-contents">
     <div v-if="!this.$parent.loggedIn">
       <h1>Login</h1>
       <p>Username:</p><input v-model="username" type="text" />
@@ -36,6 +36,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.login-contents {
+  padding-top: 20px;
+}
 h3 {
   margin: 40px 0 0;
 }

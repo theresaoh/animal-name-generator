@@ -94,6 +94,7 @@ export default {
 <style>
 #app {
   margin: 10%;
+  padding: 20px;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -103,10 +104,33 @@ export default {
 }
 .nav-bar {
   display: flex;
+  border-top: 1px #2c3e50 solid;
+  border-bottom: 1px #2c3e50 solid;
   flex-direction: row;
   justify-content: center;
+  padding: 10px;
 }
 .nav-bar-elem {
   margin: 0 10px;
 }
+button {
+  color: #2c3e50 !important;
+  background-color: #b2c6a1 !important;
+  text-transform: uppercase;
+  background: #ffffff;
+  padding: 5px;
+  border: 4px solid #2c3e50 !important;
+  border-radius: 6px;
+  display: inline-block;
+  transition: all 0.3s ease 0s;
+}
+button:hover {
+  background-color: #7d996e !important;
+  color: #2c3e50 !important;
+  border-radius: 50px;
+  border-color: #2c3e50 !important;
+  transition: all 0.3s ease 0s;
+}
+
+
 </style>
