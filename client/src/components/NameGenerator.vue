@@ -1,30 +1,30 @@
 <template>
-  <div>
+  <div class="contents">
     <h1>Animal Name Generator</h1>
-    <h4>Click on a name to set it aside. Any names set aside will be erased on page refresh.<br>Double-click to favorite a name to view later. You must be logged in to favorite names</h4>
+    <h4>Click on a name to set it aside. Any names set aside will be erased on page refresh.<br>Double-click to favorite a name to view later. You must be logged in to favorite names.</h4>
     <div class="name-generation">
       <div class="name-container">
         <button @click="getFemaleNames">Get Female Names</button>
         <ul>
-          <li @click="determineClickOrDoubleClick($event, name)" v-for="name in this.femaleNamesToDisplay">{{ name.name }}<br></li>
+          <li class="generated-names" @click="determineClickOrDoubleClick($event, name)" v-for="name in this.femaleNamesToDisplay">{{ name.name }}<br></li>
         </ul>
       </div>
       <div class="name-container">
         <button @click="getMaleNames">Get Male Names</button>
         <ul>
-          <li @click="determineClickOrDoubleClick($event, name)" v-for="name in this.maleNamesToDisplay">{{ name.name }}<br></li>
+          <li class="generated-names" @click="determineClickOrDoubleClick($event, name)" v-for="name in this.maleNamesToDisplay">{{ name.name }}<br></li>
         </ul>
       </div>
       <div class="name-container">
         <button @click="getGNNames">Get Gender-Neutral Names</button>
         <ul>
-          <li @click="determineClickOrDoubleClick($event, name)" v-for="name in this.genderNeutralNamesToDisplay">{{ name.name }}<br></li>
+          <li class="generated-names" @click="determineClickOrDoubleClick($event, name)" v-for="name in this.genderNeutralNamesToDisplay">{{ name.name }}<br></li>
         </ul>
       </div>
     </div>
     <div v-if="this.setAsideNames.length > 0">
       <hr>
-      <h1>Liked Names</h1>
+      <h1 class="liked-title">Liked Names</h1>
       <ul>
         <li class="liked-names" v-for="name in this.setAsideNames">{{ name }}</li>
       </ul>
@@ -149,16 +149,28 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.contents{
+  padding-top: 10px;
+}
+body {
+  color: #2c3e50;
+}
 h3 {
   margin: 40px 0 0;
+}
+.liked-title {
+  color: #a15655;
 }
 ul {
   list-style-type: none;
   padding: 0;
 }
 li {
-  color: black;
+  color: #2c3e50;;
   margin: 5px 10px;
+}
+.generated-names:hover {
+  font-weight: bold;
 }
 a {
   color: #42b983;
@@ -169,7 +181,8 @@ a {
   justify-content: space-around;
 }
 .name-container {
-  border: 2px solid black;
+  border: 2px solid #2c3e50;
+  padding-top: 10px;
   width: 15em;
 }
 .error-message {

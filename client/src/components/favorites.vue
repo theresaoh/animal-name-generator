@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="favorites-contents">
     <div v-if="this.$parent.loggedIn">
         <h1>Favorited Names</h1>
         <div class="favorited-names">
@@ -98,6 +98,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.favorites-contents {
+    padding-top: 20px;
+}
 h3 {
   margin: 40px 0 0;
 }
