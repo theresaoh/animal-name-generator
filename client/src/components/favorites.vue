@@ -5,7 +5,7 @@
         <div class="favorited-names">
             <div class="fav-female-names">
                 <h2>Female Names</h2>
-                <ul  v-for="name in namesToDisplay" v-if="name.name_gender == 'F'">
+                <ul  v-for="name in namesToDisplay" v-if="name.name_gender =='F'">
                     <li @click="determineClickOrDoubleClick($event, name)">{{ name.favorited_name }}</li>
                 </ul>
             </div>
