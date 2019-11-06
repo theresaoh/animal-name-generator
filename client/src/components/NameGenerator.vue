@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Animal Name Generator</h1>
-    <h4>Click on a name to set it aside. Any names set aside will be erased on page refresh. Double-click to favorite a name to view later. You must be logged in to favorite names</h4>
+    <h4>Click on a name to set it aside. Any names set aside will be erased on page refresh.<br>Double-click to favorite a name to view later. You must be logged in to favorite names</h4>
     <div class="name-generation">
       <div class="name-container">
         <button @click="getFemaleNames">Get Female Names</button>
@@ -73,7 +73,6 @@ export default {
       this.duplicateNameErrorMessage = '';
       axios.post('/duplicate-name-test', { name: this.inputValue, gender: this.addNameGender })
       .then(resp => {
-        console.log(resp.data.does_the_name_exist.length)
         if (resp.data.does_the_name_exist.length == 0){
           this.addName();
         } else {
@@ -95,19 +94,16 @@ export default {
         var self = this;
         this.timer = setTimeout(() => {
           this.result = "click"
-          console.log(name.id);
           self.clicks = 0
           this.nameAlreadySetAside(name);
           }, this.delay);
         } else {
           if (!this.$parent.loggedIn){
-            console.log("Sorry, you have to be logged in to favorite names");
             return;
           }
           clearTimeout(this.timer);
           this.favoriteName(name);
           this.result = 'Favorited';
-          console.log(this.result);
           this.clicks = 0;
         }        	     
     },

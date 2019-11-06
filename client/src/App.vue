@@ -47,7 +47,6 @@ export default {
       axios.post('/login', {username: user, password: pass})
       .then((resp) => {
         if (resp.data.success == false){
-          console.log("failed!");
           this.$router.go();
         } else {
           this.goHomeAndRefresh();
@@ -56,15 +55,13 @@ export default {
     },
     logout(){
       axios.post('/logout', {user: this.userInSession})
-      .then((resp) => {
-      })
       if (this.$route.path == '/'){
         this.$router.go();
       } else {
         this.goHomeAndRefresh();
       }
     },
-    async testUserInSession(username) {
+    async testUserInSession() {
       let promise = axios.post('/users')
       .then((resp) => {
         if (resp.data.success == false){
@@ -76,7 +73,6 @@ export default {
         return true;
       })
       let result = await promise;
-      console.log(result);
       return result;
     }
   },
