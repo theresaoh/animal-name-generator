@@ -31,10 +31,12 @@ export default {
   methods: {
     logout(){
       axios.post('/logout', {user: this.userInSession})
+      this.loggedIn = false;
       if (this.$route.path == '/'){
         this.$router.go();
         return;
       }
+      this.$router.push('/');
     },
     async testUserInSession() {
       let promise = axios.post('/users')
