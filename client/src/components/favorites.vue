@@ -98,11 +98,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.favorites-contents {
+.favorites-component {
     padding-top: 20px;
 }
 h3 {
-  margin: 40px 0 0;
+    font-weight: normal;
 }
 ul {
   list-style-type: none;
@@ -111,12 +111,17 @@ ul {
 li {
   color: black;
   display: inline-block;
-  margin: 0 10px;
 }
-.favorited-names{
+li:hover {
+    font-weight: bold;
+}
+.favorites-container {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
+.fav-names {
+    width: 18em;
 }
 a {
   color: #42b983;
