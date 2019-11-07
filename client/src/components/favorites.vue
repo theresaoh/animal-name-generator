@@ -1,6 +1,7 @@
 <template>
   <div class="favorites-component">
     <div v-if="this.$parent.loggedIn">
+    <!-- If a user is logged in, show their favorites -->
         <h1>Favorited Names</h1>
         <h3><b>Double-click</b> on a name to un-favorite it.</h3>
         <div class="favorites-container">
@@ -25,6 +26,7 @@
         </div>
     </div>
     <div v-if="!this.$parent.loggedIn">
+    <!-- if a user is not logged in, entice them to register by demonstrating favorites functionality -->
         <h1>Sorry, you must be logged in to view your favorited names.</h1>
         <h2>Registering and logging in gives you the ability to favorite the names you like the most and view them at any time, like this:</h2>
         <br>
@@ -73,6 +75,7 @@ export default {
   },
   methods: {
     determineClickOrDoubleClick(event, name){
+    // if a user clicks only once during the timeout period (300 ms), do nothing
       this.clicks++ 
       if (this.clicks === 1) {
         var self = this;
@@ -80,6 +83,8 @@ export default {
           self.clicks = 0
           }, this.delay);
         } else {
+        /* if during the timeout period the user clicked twice, remove the favorited 
+        name instance from both the page and the favorites db */
           clearTimeout(this.timer);
           axios.post('/remove-favorite', {id: name.id})
           this.clicks = 0;
@@ -89,6 +94,7 @@ export default {
     getFavoritedNames() {
         axios.get('/favorited-names')
             .then((resp) => {
+                // sort a user's favorited names by their gender so that they can be displayed by gender more easily
                 for (var i = 0; i < resp.data.favorites.length; i++){
                     if (resp.data.favorites[i].name_gender == 'F'){
                         this.femaleNamesToDisplay.push(resp.data.favorites[i]);

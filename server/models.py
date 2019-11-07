@@ -23,13 +23,14 @@ class Favorite(db.Model):
     name_gender = db.Column(db.String(2))
 
 def setup_database(app):
+    # create all tables with model information above
     with app.app_context():
         db.create_all()
 
         engine = db.get_engine()
         csv_file_path = 'Names.csv'
 
-        # Read CSV with Pandas
+        # Read CSV (Names.csv) with Pandas
         with open(csv_file_path, 'r') as file:
             df = pd.read_csv(file)
 
