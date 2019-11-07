@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div class="nav-bar">
+    <!-- Navigation bar -->
       <div v-if="this.$route.path != '/'">
         <router-link class="nav-bar-elem" :to="'/'"><button>Home</button></router-link>
       </div>
@@ -30,6 +31,7 @@ export default {
   },
   methods: {
     logout(){
+      // logs user out and redirects to home or refreshes if already on homepage
       axios.post('/logout', {user: this.userInSession})
       this.loggedIn = false;
       if (this.$route.path == '/'){
@@ -39,6 +41,8 @@ export default {
       this.$router.push('/');
     },
     async testUserInSession() {
+      /* hits backend and checks to see if a user is in session - adjusts this.loggedIn accordingly
+      this ensures that the correct navbar buttons are displayed at all times */
       let promise = axios.post('/users')
       .then((resp) => {
         if (resp.data.success == false){
@@ -49,12 +53,14 @@ export default {
         this.loggedIn = true;
         return true;
       })
+      // these lines ensure that the promise resolves before adjusting the value of this.loggedIn (accounts for asynch)
       let result = await promise;
       return result;
     }
   },
     computed: {
     displayLoginRegisterButtons(){
+      // determines if login or register buttons should be shown based on current path and this.loggedIn status
       if (this.$route.path != '/login' && !this.loggedIn){
         return true;
       } else {

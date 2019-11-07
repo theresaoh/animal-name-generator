@@ -3,6 +3,8 @@
     <h1>Animal Name Generator</h1>
     <h4><b>Click</b> on a name to set it aside. Any names set aside will be erased on page refresh.<br><b>Double-click</b> to favorite a name to view later. You must be logged in to favorite names.</h4>
     <div class="name-generation-container">
+    <!-- display 10 random female, male, and gender-neutral names at a time
+        and pull new names on each user button click -->
       <div class="name-list-container">
         <button @click="getFemaleNames">Get Female Names</button>
         <ul>
@@ -30,6 +32,7 @@
       </ul>
     </div>
     <hr>
+    <!-- Add a Name Section -->
     <h1>Add a Name</h1>
     <input placeholder="Enter Name Here" v-model="inputValue" /><br>
     <p>This name is typically:</p>
@@ -38,6 +41,7 @@
       <option value="M">Male</option>
       <option value="GN">Gender-Neutral</option>
     </select>
+    <!-- display error or success message if there's an error or success with entering new name to db -->
     <div class="error-message">{{ duplicateNameErrorMessage }}</div>
     <div class="success-message">{{ successMessage }}</div>
     <br><br>
@@ -68,11 +72,15 @@ export default {
   },
   methods: {
     testDuplicateNameInDB(){
+      // before adding a new name to the DB, make sure that it doesn't already exist
+      this.inputValue = this.inputValue.toUpperCase();
       this.successMessage = '';
       this.duplicateNameErrorMessage = '';
       axios.post('/duplicate-name-test', { name: this.inputValue, gender: this.addNameGender })
       .then(resp => {
+        console.log(resp);
         if (resp.data.does_the_name_exist.length == 0){
+          // if the response from the database has a length of 0, the name doesn't exist and should be added
           this.addName();
         } else {
           this.duplicateNameErrorMessage = "That name already exists in the database."
@@ -81,13 +89,16 @@ export default {
       })
     },
     nameAlreadySetAside(name){
+      // before setting aside a name in the "Liked Names" section of the page, make sure they're not already set aside
       if (!this.setAsideNames.includes(name.name)){
+        // if the name hasn't already been set aside, set it aside
         this.setAside(name);
         return;
       }
       return false;
     },
     determineClickOrDoubleClick(event, name){
+      // if a user clicks on a name just once during the timeout period (300 ms), set it aside in the "Liked Names" section
       this.clicks++ 
       if (this.clicks === 1) {
         var self = this;
@@ -96,6 +107,7 @@ export default {
           this.nameAlreadySetAside(name);
           }, this.delay);
         } else {
+          // if a user double-clicks during the timeout period AND is currently logged in, user favorites the name
           if (!this.$parent.loggedIn){
             return;
           }
@@ -105,9 +117,11 @@ export default {
         }        	     
     },
     setAside(name) {
+      // set aside a name in the "Liked Names" section
       this.setAsideNames.push(name.name);
     },
     favoriteName(name){
+      // favorite a name
       axios.post('/favorite-name', {name_id: name.id, favorited_name: name.name, name_gender: name.gender})
     },
     getFemaleNames() {
