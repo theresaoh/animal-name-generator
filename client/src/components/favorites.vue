@@ -1,23 +1,24 @@
 <template>
-  <div class="favorites-contents">
+  <div class="favorites-component">
     <div v-if="this.$parent.loggedIn">
         <h1>Favorited Names</h1>
-        <div class="favorited-names">
-            <div class="fav-female-names">
+        <h3><b>Double-click</b> on a name to un-favorite it.</h3>
+        <div class="favorites-container">
+            <div class="fav-names">
                 <h2>Female Names</h2>
-                <ul  v-for="name in namesToDisplay" v-if="name.name_gender =='F'">
+                <ul  v-for="name in femaleNamesToDisplay">
                     <li @click="determineClickOrDoubleClick($event, name)">{{ name.favorited_name }}</li>
                 </ul>
             </div>
-            <div class="fav-male-names">
+            <div class="fav-names">
                 <h2>Male Names</h2>
-                <ul  v-for="name in namesToDisplay" v-if="name.name_gender == 'M'">
+                <ul  v-for="name in maleNamesToDisplay">
                     <li @click="determineClickOrDoubleClick($event, name)">{{ name.favorited_name }}</li>
                 </ul>
             </div>
-            <div class="fav-gn-name">
+            <div class="fav-names">
                 <h2>Gender-Neutral Names</h2>
-                <ul  v-for="name in namesToDisplay" v-if="name.name_gender =='GN'">
+                <ul  v-for="name in gnNamesToDisplay">
                     <li @click="determineClickOrDoubleClick($event, name)">{{ name.favorited_name }}</li>
                 </ul>
             </div>
@@ -28,27 +29,27 @@
         <h2>Registering and logging in gives you the ability to favorite the names you like the most and view them at any time, like this:</h2>
         <br>
         <hr>
-        <div class="favorited-names">
-            <div>
+        <div class="favorites-container">
+            <div class="fav-names">
                 <h2>Female Names</h2>
                 <ul  v-for="name in demoFemaleNames">
-                        <li>{{ name }}</li>
-                    </ul>
-                </div>
-                <div class="fav-male-names">
-                    <h2>Male Names</h2>
-                    <ul  v-for="name in demoMaleNames">
-                        <li>{{ name }}</li>
-                    </ul>
-                </div>
-                <div class="fav-gn-name">
-                    <h2>Gender-Neutral Names</h2>
-                    <ul  v-for="name in demoGNNames">
-                        <li>{{ name }}</li>
-                    </ul>
-                </div>
+                    <li>{{ name }}</li>
+                </ul>
+            </div>
+            <div class="fav-names">
+                <h2>Male Names</h2>
+                <ul  v-for="name in demoMaleNames">
+                    <li>{{ name }}</li>
+                </ul>
+            </div>
+            <div class="fav-names">
+                <h2>Gender-Neutral Names</h2>
+                <ul  v-for="name in demoGNNames">
+                    <li>{{ name }}</li>
+                </ul>
             </div>
         </div>
+    </div>
   </div>
 </template>
 
@@ -59,13 +60,15 @@ export default {
   name: 'favorites',
   data() {
     return {
-        namesToDisplay: '',
         delay: 300,
         clicks: 0,
         timer: null,
         demoFemaleNames: ["Bella", "Luna", "Fluffy"],
         demoMaleNames: ["Rex", "Sparky", "Bruno"],
-        demoGNNames: ["Socks", "Chowder", "Snuggles"]
+        demoGNNames: ["Socks", "Chowder", "Snuggles"],
+        femaleNamesToDisplay: [],
+        maleNamesToDisplay: [],
+        gnNamesToDisplay: []
     }
   },
   methods: {
@@ -86,7 +89,15 @@ export default {
     getFavoritedNames() {
         axios.get('/favorited-names')
             .then((resp) => {
-                this.namesToDisplay = resp.data.favorites;
+                for (var i = 0; i < resp.data.favorites.length; i++){
+                    if (resp.data.favorites[i].name_gender == 'F'){
+                        this.femaleNamesToDisplay.push(resp.data.favorites[i]);
+                    } else if (resp.data.favorites[i].name_gender == 'M'){
+                        this.maleNamesToDisplay.push(resp.data.favorites[i]);
+                    } else if (resp.data.favorites[i].name_gender == 'GN'){
+                        this.gnNamesToDisplay.push(resp.data.favorites[i]);
+                    }
+                }
             })
         }
     },
