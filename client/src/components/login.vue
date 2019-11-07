@@ -7,6 +7,7 @@
       <p>Password:</p><input type="password" v-model="password"/>
       <br><br>
       <button @click="login()">Submit</button>
+      <div class="error">{{ error }}</div>
       <p>Not yet registered?</p>
       <router-link :to="'/register'"><button>Register</button></router-link>
     </div>
@@ -25,22 +26,30 @@ export default {
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      error: ''
     }
   },
   methods: {
-    login(){
+    login() {
       axios.post('/login', {username: this.username, password: this.password})
       .then((resp) => {
         if (resp.data.success == false){
-          this.$router.go();
+          // if the response is a failure, the password wasn't correct - display an error
+          this.error = "Your password was entered incorrectly. Try again.";
+          return;
+        } if (resp.data === "None") {
+          // if the response is 'None', the username entered isn't valid - display an error
+          this.error = "There's no user with that username. Please try again, or register as a new user."
+          return;
         } else {
+          // otherwise, change the status of $parent.loggedIn and redirect to homepage
+          this.username = '';
+          this.password = '';
           this.$parent.loggedIn = true;
-          this.$router.push('/')
+          this.$router.push('/');
         }
       });
-      this.username = '';
-      this.password = '';
     }
   }
 }
@@ -50,19 +59,9 @@ export default {
 .login-contents {
   padding-top: 20px;
 }
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  color: black;
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.error {
+  font-weight: bold;
+  color: red;
+  margin-top: 20px;
 }
 </style>
