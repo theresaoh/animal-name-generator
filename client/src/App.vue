@@ -30,6 +30,18 @@ export default {
     }
   },
   methods: {
+    login(user, pass) {
+      // logs user in and redirects to home
+      axios.post('/login', {username: user, password: pass})
+      .then((resp) => {
+        if (resp.data.success == false){
+          this.$router.go();
+        } else {
+          this.loggedIn = true;
+          this.$router.push('/');
+        }
+      });
+    },
     logout(){
       // logs user out and redirects to home or refreshes if already on homepage
       axios.post('/logout', {user: this.userInSession})

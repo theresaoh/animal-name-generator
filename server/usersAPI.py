@@ -27,12 +27,16 @@ def add_user():
 def login():
     username = request.json['username']
     password = request.json['password']
-    users = User.query.filter_by(username=username)
-    if users.count() == 1:
-        user = users.first()
-        if password == user.password:
-            session['user'] = user.username
-            return jsonify({"username": user.username})
+    # query the database with the provided username
+    user = User.query.filter_by(username=username).one_or_none()
+    # if the response is 'None', the username entered isn't valid
+    if user == None:
+        return 'None'
+    if password == user.password:
+        # if the username was valid and the password entered matches the password
+        # in the DB, create a session for that user
+        session['user'] = user.username
+        return jsonify({"username": user.username})
     return jsonify(success = False)
 
 @users_api.route('/users', methods=['POST', 'GET'])
