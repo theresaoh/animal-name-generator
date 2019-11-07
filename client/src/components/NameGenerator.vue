@@ -61,7 +61,6 @@ export default {
       addNameGender: '',
       duplicateNameErrorMessage: '',
       successMessage: '',
-      result: '',
       delay: 300,
       clicks: 0,
       timer: null
@@ -84,16 +83,15 @@ export default {
     nameAlreadySetAside(name){
       if (!this.setAsideNames.includes(name.name)){
         this.setAside(name);
-      } else {
-        return false;
+        return;
       }
+      return false;
     },
     determineClickOrDoubleClick(event, name){
       this.clicks++ 
       if (this.clicks === 1) {
         var self = this;
         this.timer = setTimeout(() => {
-          this.result = "click"
           self.clicks = 0
           this.nameAlreadySetAside(name);
           }, this.delay);
@@ -103,7 +101,6 @@ export default {
           }
           clearTimeout(this.timer);
           this.favoriteName(name);
-          this.result = 'Favorited';
           this.clicks = 0;
         }        	     
     },
@@ -147,16 +144,9 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.contents{
+.name-generator-component{
   padding-top: 10px;
-}
-body {
-  color: #2c3e50;
-}
-h3 {
-  margin: 40px 0 0;
 }
 h4 {
   font-weight: normal;
