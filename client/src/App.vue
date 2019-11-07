@@ -18,20 +18,10 @@
 </template>
 
 <script>
-// import NameGenerator from './components/NameGenerator.vue'
-// import login from './components/login.vue'
-// import register from './components/register.vue'
-// import favorites from './components/favorites.vue'
 import axios from 'axios'
 
 export default {
   name: 'app',
-  // components: {
-  //   NameGenerator,
-  //   login,
-  //   register,
-  //   favorites
-  // },
   data() {
     return {
       userInSession: '',
@@ -39,26 +29,11 @@ export default {
     }
   },
   methods: {
-    goHomeAndRefresh() {
-      this.$router.push('/');
-      this.$router.go();
-    },
-    login(user, pass){
-      axios.post('/login', {username: user, password: pass})
-      .then((resp) => {
-        if (resp.data.success == false){
-          this.$router.go();
-        } else {
-          this.goHomeAndRefresh();
-        }
-      });
-    },
     logout(){
       axios.post('/logout', {user: this.userInSession})
       if (this.$route.path == '/'){
         this.$router.go();
-      } else {
-        this.goHomeAndRefresh();
+        return;
       }
     },
     async testUserInSession() {

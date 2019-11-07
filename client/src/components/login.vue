@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'login',
   data() {
@@ -26,7 +28,15 @@ export default {
   },
   methods: {
     login(){
-      this.$parent.login(this.username, this.password);
+      axios.post('/login', {username: this.username, password: this.password})
+      .then((resp) => {
+        if (resp.data.success == false){
+          this.$router.go();
+        } else {
+          this.$parent.loggedIn = true;
+          this.$router.push('/')
+        }
+      });
       this.username = '';
       this.password = '';
     }
