@@ -78,7 +78,6 @@ export default {
       this.duplicateNameErrorMessage = '';
       axios.post('/duplicate-name-test', { name: this.inputValue, gender: this.addNameGender })
       .then(resp => {
-        console.log(resp);
         if (resp.data.does_the_name_exist.length == 0){
           // if the response from the database has a length of 0, the name doesn't exist and should be added
           this.addName();
@@ -143,7 +142,6 @@ export default {
         })
     },
     addName() {
-      this.inputValue = this.inputValue.toUpperCase();
       axios.post('/name', {name: this.inputValue, gender: this.addNameGender})
       this.successMessage = "You've added that name to the database!";
       this.inputValue = '';

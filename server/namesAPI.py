@@ -4,8 +4,6 @@ from sqlalchemy_db_instance import db
 from models import Name
 import pandas as pd
 
-names = [{"id": 0, "name": "Nap Time All-Star", "gender": "GN" }]
-
 names_api = Blueprint('names_api', __name__)
 
 @names_api.route('/duplicate-name-test', methods=["POST"])
@@ -18,12 +16,6 @@ def test_duplicate_name():
     # if there are any names in the database, they will be returned 
     # otherwise, an empty array will be returned
     return jsonify({"does_the_name_exist": name_in_db_results})
-
-@names_api.route('/names', methods=['GET'])
-def serve_all_names():
-    name_instances = db.session.query(Name).all()
-    name_results = [{"id": name.id, "name": name.name, "gender": name.gender} for name in name_instances]
-    return jsonify({"name": name_results})
 
 @names_api.route('/male-names', methods=['GET'])
 def serve_male_names():
