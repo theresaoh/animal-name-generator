@@ -1,24 +1,24 @@
 <template>
-  <div class="contents">
+  <div class="name-generator-component">
     <h1>Animal Name Generator</h1>
     <h4><b>Click</b> on a name to set it aside. Any names set aside will be erased on page refresh.<br><b>Double-click</b> to favorite a name to view later. You must be logged in to favorite names.</h4>
-    <div class="name-generation">
-      <div class="name-container">
+    <div class="name-generation-container">
+      <div class="name-list-container">
         <button @click="getFemaleNames">Get Female Names</button>
         <ul>
-          <li class="generated-names" @click="determineClickOrDoubleClick($event, name)" v-for="name in this.femaleNamesToDisplay">{{ name.name }}<br></li>
+          <li class="name-list" @click="determineClickOrDoubleClick($event, name)" v-for="name in this.femaleNamesToDisplay" :key="name.id">{{ name.name }}<br></li>
         </ul>
       </div>
-      <div class="name-container">
+      <div class="name-list-container">
         <button @click="getMaleNames">Get Male Names</button>
         <ul>
-          <li class="generated-names" @click="determineClickOrDoubleClick($event, name)" v-for="name in this.maleNamesToDisplay">{{ name.name }}<br></li>
+          <li class="name-list" @click="determineClickOrDoubleClick($event, name)" v-for="name in this.maleNamesToDisplay" :key="name.id">{{ name.name }}<br></li>
         </ul>
       </div>
-      <div class="name-container">
+      <div class="name-list-container">
         <button @click="getGNNames">Get Gender-Neutral Names</button>
         <ul>
-          <li class="generated-names" @click="determineClickOrDoubleClick($event, name)" v-for="name in this.genderNeutralNamesToDisplay">{{ name.name }}<br></li>
+          <li class="name-list" @click="determineClickOrDoubleClick($event, name)" v-for="name in this.genderNeutralNamesToDisplay" :key="name.id">{{ name.name }}<br></li>
         </ul>
       </div>
     </div>
@@ -26,7 +26,7 @@
       <hr>
       <h1 class="liked-title">Liked Names</h1>
       <ul>
-        <li class="liked-names" v-for="name in this.setAsideNames">{{ name }}</li>
+        <li class="liked-names-list" v-for="name in this.setAsideNames" :key="name.id">{{ name }}</li>
       </ul>
     </div>
     <hr>
@@ -173,18 +173,15 @@ li {
   margin: 5px 10px;
   font-weight: bold;
 }
-.generated-names:hover {
+.name-list:hover {
   font-weight: normal;
 }
-a {
-  color: #42b983;
-}
-.name-generation {
+.name-generation-container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
-.name-container {
+.name-list-container {
   border: 1px solid #2c3e50;
   padding-top: 10px;
   width: 15em;
@@ -197,7 +194,7 @@ a {
   color: green;
   font-weight: bold;
 }
-.liked-names {
+.liked-names-list {
   display: inline-block;
   font-weight: normal;
 }
