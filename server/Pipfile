@@ -9,6 +9,7 @@ verify_ssl = true
 flask = "*"
 flask-sqlalchemy = "*"
 pandas = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.7"
