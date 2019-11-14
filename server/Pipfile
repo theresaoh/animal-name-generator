@@ -10,6 +10,7 @@ flask = "*"
 flask-sqlalchemy = "*"
 pandas = "*"
 psycopg2-binary = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.7"
