@@ -4,7 +4,6 @@ from namesAPI import names_api
 from usersAPI import users_api
 from favoritesAPI import favorites_api
 from sqlalchemy_db_instance import db
-from secrets import secret_key
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
 project_paths = project_dir.split("/")
@@ -17,7 +16,7 @@ def create_app():
         static_folder = "./dist/static",
         template_folder = "./dist"
     )
-    app.secret_key = secret_key
+    app.secret_key = os.environ["SECRET_KEY"]
     if os.environ["RUN_ENVIRONMENT"] == 'network':
         app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://{user}:{pw}@{url}/{db}".format(user=os.environ["DB_USER"],pw=os.environ["DB_PASS"],url=os.environ["DB_URL"],db=os.environ["DB_NAME"])
     else:
