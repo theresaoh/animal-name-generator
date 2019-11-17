@@ -1,10 +1,16 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, session
 from sqlalchemy import func, insert
 from sqlalchemy_db_instance import db
 from models import Name
+import os
 import pandas as pd
+import requests
+from requests.auth import HTTPBasicAuth
 
 names_api = Blueprint('names_api', __name__)
+
+api_root = os.environ["API_ROOT"]
+api_key = os.environ["API_TOKEN"]
 
 @names_api.route('/duplicate-name-test', methods=["POST"])
 def test_duplicate_name():
@@ -16,6 +22,18 @@ def test_duplicate_name():
     # if there are any names in the database, they will be returned 
     # otherwise, an empty array will be returned
     return jsonify({"does_the_name_exist": name_in_db_results})
+
+@names_api.route('/trending-movie-names', methods=["POST"])
+def get_trending_movie_names():
+    api_url = api_root + "/trending/movie/day"
+    response = requests.get(f"{api_url}?api_key={api_key}")
+    return response.text
+
+@names_api.route('/movie-credits', methods=["POST"])
+def get_movie_credits():
+    movie_id = request.json["movie_id"]
+    response = requests.get(f"{api_root}/movie/{movie_id}?api_key={api_key}&append_to_response=credits")
+    return response.text
 
 @names_api.route('/male-names', methods=['GET'])
 def serve_male_names():

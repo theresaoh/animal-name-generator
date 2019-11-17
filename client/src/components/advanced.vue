@@ -3,6 +3,7 @@
         <h1>Names From Popular Films</h1>
         <h4>Find names from a list of the top 20 currently trending films.<br>Select a name here:</h4>
         <select v-model="selectedMovie" @change="displayMovieInfo()">
+            <option selected disabled>Choose a Movie</option>
             <option v-for="movie in moviesResultsObjects" :value="movie">{{movie.title}}</option>
         </select>
         <br><br>
@@ -41,13 +42,20 @@ export default {
       this.selectedMovieCharacterNames = this.selectedMovie.credits.cast;
     },
     discoverMovies: function () {
-        axios.get(`${api.root}/trending/movie/day?api_key=${api.token}`)
+        axios.post('/trending-movie-names')
         .then((response) => {
+            //serve top 20 trending movies and put them in a list
             this.trendingMovies = response.data.results;
         for (var i = 0; i < this.trendingMovies.length; i++){
+            //grab the ID of each movie in the list
             this.movieId = this.trendingMovies[i].id;
-            axios.get(`${api.root}/movie/${this.movieId}?api_key=${api.token}&append_to_response=credits`)
+            //for each movie in the list, access all information about that movie (including cast and characters)
+            //I have this split into two post requests because the movie API I'm using requires a more specific
+            //search in order to serve cast/characters/credits from movies than the search that allows a user to find trending movies
+            //so first one must find trending movies, then search the ID of each of those movies more specifically to access character names
+            axios.post('/movie-credits', {movie_id: this.movieId})
                 .then((response) => {
+                    //store more specific movie information on each movie to be referenced later
                     this.moviesResultsObjects.push(response.data);
                 });
             }
