@@ -1,7 +1,7 @@
 <template>
     <div class="advanced-component">
         <h1>Names From Popular Films</h1>
-        <h4>Find names from a list of the top 20 currently trending films.<br>Select a name here:</h4>
+        <h4>Find names from a list of the top 20 currently trending films.<br>Select a movie here:</h4>
         <select v-model="selectedMovie" @change="displayMovieInfo()">
             <option selected disabled>Choose a Movie</option>
             <option v-for="movie in moviesResultsObjects" :value="movie">{{movie.title}}</option>
