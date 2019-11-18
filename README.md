@@ -23,36 +23,34 @@ Requirements
 
 Installation & Running Locally
 ------------------------------
-    - Open terminal and cd into the folder in which you'd like this project to live
-    - `git clone https://github.com/theresaoh/animal-name-generator.git`
-    - `cd animal-name-generator`
-    - Configure Environment variables (instructions below)
-    - Open another terminal tab
-    - *In one tab:*
-        - `cd server`
-        - `pipenv install`
-        - `touch .env`
-        - `code .env` Follow instructions for .env file below
-        - `pipenv run python main.py`
-    -*In the other tab:*
-        - `cd client`
-        - `npm install`
-        - `npm run build`
+    * Open terminal and cd into the folder in which you'd like this project to live
+    * `git clone https://github.com/theresaoh/animal-name-generator.git`
+    * `cd animal-name-generator`
+    * Configure Environment variables (instructions below)
+    * Open another terminal tab
+    * *In one tab:*
+        * `cd server`
+        * `pipenv install`
+        * `touch .env`
+        * `code .env` Follow instructions for .env file below
+        * `pipenv run python main.py`
+    * *In the other tab:*
+        * `cd client`
+        * `npm install`
+        * `npm run build`
 
 Environment Variable Configuration
 ----------------------------------
 Within the `server` folder, create a file called `.env`. In it, fill in the following values:
-    ```
-    RUN_ENVIRONMENT=local
-    SECRET_KEY =*enter a secret key here*
-    API_ROOT = https://api.themoviedb.org/3
-    API_TOKEN = *register for a api_key with the API above and enter it here*
-    ```
+    - RUN_ENVIRONMENT=local
+    - SECRET_KEY =*enter a secret key here*
+    - API_ROOT = https://api.themoviedb.org/3
+    - API_TOKEN = *register for a api_key with the API above and enter it here*
 
 
 Environment Variable Configuration
 ----------------------------------
-Within the `server` folder, create a file called `.env`. In it, fill in the following values:
+>Within the `server` folder, create a file called `.env`. In it, fill in the following values:
     ```
     RUN_ENVIRONMENT=local
     SECRET_KEY =*enter a secret key here*
@@ -67,7 +65,7 @@ Configuring the Database (if you need to seed a db, or any other db config steps
 
 Next Steps
 ----------
-Here are some features I'd like to add in the future:
+>Here are some features I'd like to add in the future:
     * Advanced search (e.g. names starting with or ending with a letter/letters)
     * Top favorited names viewable by any user
     * Giving users the ability to view a list of any names they've added to the database
