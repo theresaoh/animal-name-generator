@@ -52,12 +52,10 @@ Seeding the Database
 Environment Variable Configuration
 ----------------------------------
 Within the `server` folder, create a file called `.env`. In it, fill in the following values:  
-        `
-        RUN_ENVIRONMENT=**local**  
-        SECRET_KEY =**enter a secret key here**  
-        API_ROOT = **https://api.themoviedb.org/3**  
-        API_TOKEN = **register for a api_key with the API above and enter it here**  
-        `
+    RUN_ENVIRONMENT=**local**  
+    SECRET_KEY =**enter a secret key here**  
+    API_ROOT = **https://api.themoviedb.org/3**  
+    API_TOKEN = **register for a api_key with the API above and enter it here**  
 
 Known Issues
 ------------
