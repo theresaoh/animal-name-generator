@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, session
 from sqlalchemy_db_instance import db
 from models import User
+from hashutils import make_salt, make_pw_hash, check_pw_hash
 
 users_api = Blueprint('users_api', __name__)
 
@@ -18,10 +19,13 @@ def add_user():
     # add a new user to the User Table in DB
     new_user = User()
     new_user.username = request.json["username"]
-    new_user.password = request.json["password"]
+    plain_text_password = request.json["password"]
+    salt = make_salt()
+    new_user.salt = salt
+    new_user.password = make_pw_hash(salt, plain_text_password)
     db.session.add(new_user)
     db.session.commit()
-    return jsonify({"username": new_user.username, "password": new_user.password})
+    return jsonify({"username": new_user.username, "password": new_user.password, "salt": new_user.salt})
 
 @users_api.route('/login', methods=["POST"])
 def login():
@@ -32,7 +36,7 @@ def login():
     # if the response is 'None', the username entered isn't valid
     if user == None:
         return 'None'
-    if password == user.password:
+    if check_pw_hash(user.salt, password, user.password):
         # if the username was valid and the password entered matches the password
         # in the DB, create a session for that user
         session['user'] = user.username
