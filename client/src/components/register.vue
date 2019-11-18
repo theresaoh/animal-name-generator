@@ -75,13 +75,12 @@ export default {
     addNewUser() {
       // add a new user to the DB, log them in, and redirect to the home page
       axios.post('/add-user', { username: this.username, password: this.password })
-      .then(resp => {
-        // this method lives in the parent component (App.vue)
-        this.$parent.login(resp.data.username, resp.data.password);
-      })
+      this.$parent.loggedIn = true;
+      this.$parent.userInSession = this.username;
       this.username = '';
       this.password = '';
       this.confirmPassword = '';
+      this.$router.push('/');
     }
   }
 }

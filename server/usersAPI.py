@@ -25,7 +25,9 @@ def add_user():
     new_user.password = make_pw_hash(salt, plain_text_password)
     db.session.add(new_user)
     db.session.commit()
-    return jsonify({"username": new_user.username, "password": new_user.password, "salt": new_user.salt})
+    # add the user to session
+    session['user'] = new_user.username
+    return jsonify({"username": new_user.username})
 
 @users_api.route('/login', methods=["POST"])
 def login():
