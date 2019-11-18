@@ -21,7 +21,9 @@ def add_user():
     new_user.username = request.json["username"]
     plain_text_password = request.json["password"]
     salt = make_salt()
+    # save unique salts in the db with each user
     new_user.salt = salt
+    # salt and hash all passwords being entered into db
     new_user.password = make_pw_hash(salt, plain_text_password)
     db.session.add(new_user)
     db.session.commit()

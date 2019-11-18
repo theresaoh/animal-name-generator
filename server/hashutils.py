@@ -3,14 +3,17 @@ import random
 import string
 
 def make_salt():
-    return ''.join([random.choice(string.ascii_letters) for x in range(35)])
+  # randomly generate a salt for each user
+  return ''.join([random.choice(string.ascii_letters) for x in range(35)])
 
 def make_pw_hash(salt, password):
-    salted_pw = salt + password
-    hash = hashlib.sha256(str.encode(salted_pw)).hexdigest()
-    return hash
+  # add salt to password and hash the entire thing
+  salted_pw = salt + password
+  hash = hashlib.sha256(str.encode(salted_pw)).hexdigest()
+  return hash
 
 def check_pw_hash(salt, password, hash):
-    if make_pw_hash(salt, password) == hash:
-        return True
-    return False
+  # verify that the password entered by a user on login is the same as the secure pass in the db
+  if make_pw_hash(salt, password) == hash:
+      return True
+  return False
