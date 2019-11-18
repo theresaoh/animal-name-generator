@@ -23,50 +23,50 @@ Requirements
 
 Installation & Running Locally
 ------------------------------
-    * Open terminal and cd into the folder in which you'd like this project to live
-    * `git clone https://github.com/theresaoh/animal-name-generator.git`
-    * `cd animal-name-generator`
-    * Configure Environment variables (instructions below)
-    * Open another terminal tab
-    * *In one tab:*
-        * `cd server`
-        * `pipenv install`
-        * `touch .env`
-        * `code .env` Follow instructions for .env file below
-        * `pipenv run python main.py`
-    * *In the other tab:*
-        * `cd client`
-        * `npm install`
-        * `npm run build`
+- Open terminal and cd into the folder in which you'd like this project to live
+- `git clone https://github.com/theresaoh/animal-name-generator.git`
+- `cd animal-name-generator`
+- Open another terminal tab
+- *In one tab:*
+    - `mkdir db`
+    - `cd server`
+    - `pipenv install`
+    - `touch .env`
+    - `code .env` (Instructions below on configuring environment variables)
+    - Seed the dabase (Instructions below)
+    - `pipenv run python main.py`
+- *In the other tab:*
+    - `cd client`
+    - `npm install`
+    - `npm run build`
+
+Seeding the Database
+--------------------
+- In the server file, open models.py
+- Uncomment lines 31-45 at the bottom of the file
+- `pipenv run python main.py`
+- Due to a known issue, the server will crash after the db has been seeded
+- Re-comment lines 31-45 in models.py
+- Continue with instructions above in Installation & Running Locally
 
 Environment Variable Configuration
 ----------------------------------
-Within the `server` folder, create a file called `.env`. In it, fill in the following values:
-    - RUN_ENVIRONMENT=local
-    - SECRET_KEY =*enter a secret key here*
-    - API_ROOT = https://api.themoviedb.org/3
-    - API_TOKEN = *register for a api_key with the API above and enter it here*
+Within the `server` folder, create a file called `.env`. In it, fill in the following values:  
+        `
+        RUN_ENVIRONMENT=**local**  
+        SECRET_KEY =**enter a secret key here**  
+        API_ROOT = **https://api.themoviedb.org/3**  
+        API_TOKEN = **register for a api_key with the API above and enter it here**  
+        `
 
-
-Environment Variable Configuration
-----------------------------------
->Within the `server` folder, create a file called `.env`. In it, fill in the following values:
-    ```
-    RUN_ENVIRONMENT=local
-    SECRET_KEY =*enter a secret key here*
-    API_ROOT = https://api.themoviedb.org/3
-    API_TOKEN = *register for a api_key with the API above and enter it here*
-    ```
-
-Deployment Configuration (How can they deploy it if they want to)
-   - Setting Up an AWS RDS PostgreSQL Instance (Or SQLite3)
-
-Configuring the Database (if you need to seed a db, or any other db config steps)
+Known Issues
+------------
+- Seeds.py file doesn't work as it should; database seed instructions currently are inelegant and should be improved
 
 Next Steps
 ----------
->Here are some features I'd like to add in the future:
-    * Advanced search (e.g. names starting with or ending with a letter/letters)
-    * Top favorited names viewable by any user
-    * Giving users the ability to view a list of any names they've added to the database
-    * Giving users the ability to favorite or set aside names from the movies-names page
+Here are some features I'd like to add in the future:  
+* Advanced search (e.g. names starting with or ending with a letter/letters)
+* Top favorited names viewable by any user
+* Giving users the ability to view a list of any names they've added to the database
+* Giving users the ability to favorite or set aside names from the movies-names page
