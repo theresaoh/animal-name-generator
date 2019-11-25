@@ -4,7 +4,7 @@
         <h4>Find names from a list of the top 20 currently trending films.<br>Select a movie here:</h4>
         <select v-model="selectedMovie" @change="displayMovieInfo()">
             <option selected disabled>Choose a Movie</option>
-            <option v-for="movie in moviesResultsObjects" :value="movie">{{movie.title}}</option>
+            <option v-for="(movie, index) in moviesResultsObjects" :key="index">{{movie.title}}</option>
         </select>
         <br><br>
         <h1>{{ selectedMovie.title }}</h1><br>
@@ -15,7 +15,7 @@
             <div class="selected-movie-info">
             <h2>Character Names</h2>
             <ul>
-                <li v-for="char in selectedMovieCharacterNames">{{ char.character }}</li>
+                <li v-for="(char, index) in selectedMovieCharacterNames" :key='index'>{{ char.character }}</li>
             </ul>
             </div>
         </div>  
