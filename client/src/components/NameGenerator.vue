@@ -142,7 +142,10 @@ export default {
         })
     },
     addName() {
-      axios.post('/name', {name: this.inputValue, gender: this.addNameGender})
+      axios.post('/name', {
+        name: this.inputValue, 
+        gender: this.addNameGender
+        })
       this.successMessage = "You've added that name to the database!";
       this.inputValue = '';
       this.addNameGender = '';

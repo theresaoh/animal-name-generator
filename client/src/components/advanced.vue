@@ -4,7 +4,7 @@
         <h4>Find names from a list of the top 20 currently trending films.<br>Select a movie here:</h4>
         <select v-model="selectedMovie" @change="displayMovieInfo()">
             <option selected disabled>Choose a Movie</option>
-            <option v-for="(movie, index) in moviesResultsObjects" :key="index">{{movie.title}}</option>
+            <option v-for="(movie, index) in moviesResultsObjects" :value="movie" :key='index'>{{movie.title}}</option>
         </select>
         <br><br>
         <h1>{{ selectedMovie.title }}</h1><br>
@@ -24,7 +24,6 @@
 
 <script>
 import axios from 'axios';
-
 export default {
   name: 'advanced',
   data() {

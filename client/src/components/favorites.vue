@@ -34,19 +34,19 @@
         <div class="favorites-container">
             <div class="fav-names">
                 <h2>Female Names</h2>
-                <ul  v-for="name in demoFemaleNames">
+                <ul  v-for="(name, index) in demoFemaleNames" :key='index'>
                     <li>{{ name }}</li>
                 </ul>
             </div>
             <div class="fav-names">
                 <h2>Male Names</h2>
-                <ul  v-for="name in demoMaleNames">
+                <ul  v-for="(name, index) in demoMaleNames" :key='index'>
                     <li>{{ name }}</li>
                 </ul>
             </div>
             <div class="fav-names">
                 <h2>Gender-Neutral Names</h2>
-                <ul  v-for="name in demoGNNames">
+                <ul  v-for="(name, index) in demoGNNames" :key='index'>
                     <li>{{ name }}</li>
                 </ul>
             </div>
