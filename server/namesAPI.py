@@ -63,6 +63,7 @@ def add_name():
     new_name.id = determine_next_id()
     new_name.name = request.json["name"]
     new_name.gender = request.json["gender"]
+    new_name.name_owner = request.json["owner_name"]
     db.session.add(new_name)
     db.session.commit()
     return jsonify(success=True)
@@ -74,3 +75,11 @@ def determine_next_id():
     max_id = db.session.query(func.max(Name.id)).scalar()
     result = max_id + 1
     return result
+
+@names_api.route('/user-added-names', methods=['POST'])
+def user_added_names():
+    name_owner = request.json["name_owner"]
+    print(name_owner)
+    your_names = db.session.query(Name).filter(Name.name_owner == str(name_owner)).all()
+    name_list = [name.name for name in your_names]
+    return jsonify({"name_list": name_list})

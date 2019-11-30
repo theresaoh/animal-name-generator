@@ -69,6 +69,7 @@ export default {
       clicks: 0,
       timer: null,
       selected: undefined,
+      loggedInUser: '',
     }
   },
   methods: {
@@ -151,14 +152,22 @@ export default {
     addName() {
       axios.post('/name', {
         name: this.inputValue, 
-        gender: this.addNameGender
+        gender: this.addNameGender,
+        owner_name: this.loggedInUser,
         })
       this.successMessage = "You've added that name to the database!";
       this.inputValue = '';
       this.addNameGender = '';
+    },
+    getSessionName() {
+      axios.post('/users')
+      .then((resp) => {
+        this.loggedInUser = resp.data.userInSession
+      })
     }
   },
   mounted() {
+    this.getSessionName()
     this.getGNNames(),
     this.getMaleNames(),
     this.getFemaleNames()

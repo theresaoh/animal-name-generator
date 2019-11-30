@@ -11,6 +11,7 @@
       </div>
         <router-link class="nav-bar-elem" :to="'/favorites'"><button>Favorites</button></router-link>
         <router-link class="nav-bar-elem" :to="'/advanced'"><button>Movie Names</button></router-link>
+        <router-link class="nav-bar-elem" :to="'/added-names'"><button>Your Names</button></router-link>
       <div v-if="this.loggedIn">
           <button class="nav-bar-elem" @click="logout()">Log Out</button>
       </div>

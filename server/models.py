@@ -7,6 +7,7 @@ class Name(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(500))
     gender = db.Column(db.String(2))
+    name_owner = db.Column(db.Integer, db.ForeignKey('user_table.id'))
 
 class User(db.Model):
     __tablename__ = 'user_table'

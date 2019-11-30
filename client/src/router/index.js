@@ -6,8 +6,8 @@ const routerOptions = [
   { path: '/login', component: 'login' },
   { path: '/register', component: 'register'},
   { path: '/favorites', component: 'favorites'},
-  { path: '/advanced', component: 'advanced'}
-
+  { path: '/advanced', component: 'advanced'},
+  { path: '/added-names', component: 'addedNames'}
 ]
 const routes = routerOptions.map(route => {
   return {
