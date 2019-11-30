@@ -1,10 +1,13 @@
 <template>
     <div class="added-component">
         <h1>Your Names</h1>
-        <div class="added-container">
+        <div v-if="loggedInUser" class="added-container">
             <ul>
                 <li v-for="name in nameList" :key='name.id'>{{name}}</li>
             </ul>
+        </div>
+        <div v-else> 
+            <p>Please login to view your favorite names</p>
         </div>
     </div>
 </template>
