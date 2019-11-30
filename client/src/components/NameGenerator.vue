@@ -1,5 +1,10 @@
 <template>
   <div class="name-generator-component">
+    <h1>Generate Random Name</h1>
+    <button @click="getRandomName">Get Random Name</button><br><br>
+    <h3 v-if="!first_name"> _____________ _____________ ___________ </h3>
+    <h3 v-else>{{first_name}} {{middle_name}} {{last_name}}</h3><br>
+    <hr>
     <h1>Animal Name Generator</h1>
     <h4><b>Click</b> on a name to set it aside. Any names set aside will be erased on page refresh.<br><b>Double-click</b> to favorite a name to view later. You must be logged in to favorite names.</h4>
     <div class="name-generation-container">
@@ -70,9 +75,19 @@ export default {
       timer: null,
       selected: undefined,
       loggedInUser: '',
+      first_name: '',
+      middle_name: '',
+      last_name: '',
     }
   },
   methods: {
+    getRandomName() {
+      axios.get('/get-random-name').then(resp => {
+        this.first_name = resp.data.first_name
+        this.middle_name = resp.data.middle_name
+        this.last_name = resp.data.last_name
+      })
+    },
     doubleClicked(name) {
       this.isDoubleClicked = false
       console.log(name.name)

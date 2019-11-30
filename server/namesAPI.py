@@ -79,7 +79,15 @@ def determine_next_id():
 @names_api.route('/user-added-names', methods=['POST'])
 def user_added_names():
     name_owner = request.json["name_owner"]
-    print(name_owner)
     your_names = db.session.query(Name).filter(Name.name_owner == str(name_owner)).all()
     name_list = [name.name for name in your_names]
     return jsonify({"name_list": name_list})
+
+@names_api.route('/get-random-name', methods=['GET'])
+def get_random_name():
+    first_name = db.session.query(Name).order_by(func.random()).first().name
+    middle_name = db.session.query(Name).order_by(func.random()).first().name
+    last_name = db.session.query(Name).order_by(func.random()).first().name
+    return jsonify({'first_name': first_name,
+                    'middle_name': middle_name,
+                    'last_name': last_name})
