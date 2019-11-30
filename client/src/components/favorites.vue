@@ -130,6 +130,7 @@ li {
 }
 li:hover {
     font-weight: bold;
+    cursor: pointer;
 }
 .favorites-container {
     display: flex;

@@ -8,19 +8,19 @@
       <div class="name-list-container">
         <button @click="getFemaleNames">Get Female Names</button>
         <ul>
-          <li class="name-list" @click="determineClickOrDoubleClick($event, name)" v-for="name in this.femaleNamesToDisplay" :key="name.id">{{ name.name }}<br></li>
+          <li class="name-list" :class="{highlight:name.id == selected}" @click="determineClickOrDoubleClick($event, name)" v-for="name in this.femaleNamesToDisplay" :key="name.id" >{{ name.name }}<br></li>
         </ul>
       </div>
       <div class="name-list-container">
         <button @click="getMaleNames">Get Male Names</button>
         <ul>
-          <li class="name-list" @click="determineClickOrDoubleClick($event, name)" v-for="name in this.maleNamesToDisplay" :key="name.id">{{ name.name }}<br></li>
+          <li class="name-list" :class="{highlight:name.id == selected}" @click="determineClickOrDoubleClick($event, name)" v-for="name in this.maleNamesToDisplay" :key="name.id">{{ name.name }}<br></li>
         </ul>
       </div>
       <div class="name-list-container">
         <button @click="getGNNames">Get Gender-Neutral Names</button>
         <ul>
-          <li class="name-list" @click="determineClickOrDoubleClick($event, name)" v-for="name in this.genderNeutralNamesToDisplay" :key="name.id">{{ name.name }}<br></li>
+          <li class="name-list" :class="{highlight:name.id == selected}" @click="determineClickOrDoubleClick($event, name)" v-for="name in this.genderNeutralNamesToDisplay" :key="name.id">{{ name.name }}<br></li>
         </ul>
       </div>
     </div>
@@ -67,10 +67,15 @@ export default {
       successMessage: '',
       delay: 300,
       clicks: 0,
-      timer: null
+      timer: null,
+      selected: undefined,
     }
   },
   methods: {
+    doubleClicked(name) {
+      this.isDoubleClicked = false
+      console.log(name.name)
+    },
     testDuplicateNameInDB(){
       // before adding a new name to the DB, make sure that it doesn't already exist
       this.inputValue = this.inputValue.toUpperCase();
@@ -110,6 +115,7 @@ export default {
           if (!this.$parent.loggedIn){
             return;
           }
+          this.selected = name.id
           clearTimeout(this.timer);
           this.favoriteName(name);
           this.clicks = 0;
@@ -122,6 +128,7 @@ export default {
     favoriteName(name){
       // favorite a name
       axios.post('/favorite-name', {name_id: name.id, favorited_name: name.name, name_gender: name.gender})
+      this.isDoubleClicked = true
     },
     getFemaleNames() {
       axios.get('/female-names')
@@ -180,6 +187,7 @@ li {
 }
 .name-list:hover {
   font-weight: normal;
+  cursor: pointer;
 }
 .name-generation-container {
   display: flex;
@@ -191,6 +199,10 @@ li {
   padding-top: 10px;
   width: 15em;
 }
+li.highlight{
+  animation: effect_dylan 0.5s ease-out;
+}
+
 .error-message {
   color: red;
   font-weight: bold;
@@ -202,5 +214,11 @@ li {
 .liked-names-list {
   display: inline-block;
   font-weight: normal;
+}
+@keyframes effect_dylan {
+  50% {
+    transform: scale(1.5, 1.5);
+    opacity: 1;
+  }
 }
 </style>
