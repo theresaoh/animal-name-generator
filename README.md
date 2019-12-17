@@ -1,7 +1,7 @@
 Animal Name Generator
 =====================
 
-Do you have a new pet? Can't think of great names like "Naptime Allstar", "Captain Karen", "Grampy", or "Spinach" on your own? Then this is the program for you! C'mon, there are too many cats out there named "Socks" anyway.
+Do you have a new pet? Can't think of great names like "Naptime Allstar", "Captain Karen", "Grampy", or "Spinach" on your own? Then this is the program for you! C'mon, there are too many cats out there named "Socks" anyway. 
 
 This program was created in order to assist staff and volunteers at local animal shelters with naming animals. After working in a shelter environment for a while, it can be difficult to come up with unique names for the animals, and many programs of this kind have a limited subset of names, or names along a specific theme. While this program was developed with shelter staff in mind, it's great for anyone anywhere with an animal in need of a great name.
 
