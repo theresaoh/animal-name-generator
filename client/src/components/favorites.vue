@@ -7,19 +7,19 @@
       <div class="favorites-container">
         <div class="fav-names">
           <h2>Female Names</h2>
-          <ul  v-for="name in femaleNamesToDisplay" :key="name.id">
+          <ul v-for="name in femaleNamesToDisplay" :key="name.id">
             <li @click="determineClickOrDoubleClick($event, name)">{{ name.favorited_name }}</li>
           </ul>
         </div>
         <div class="fav-names">
           <h2>Male Names</h2>
-          <ul  v-for="name in maleNamesToDisplay" :key="name.id">
+          <ul v-for="name in maleNamesToDisplay" :key="name.id">
             <li @click="determineClickOrDoubleClick($event, name)">{{ name.favorited_name }}</li>
           </ul>
         </div>
         <div class="fav-names">
           <h2>Gender-Neutral Names</h2>
-          <ul  v-for="name in gnNamesToDisplay" :key="name.id">
+          <ul v-for="name in gnNamesToDisplay" :key="name.id">
             <li @click="determineClickOrDoubleClick($event, name)">{{ name.favorited_name }}</li>
           </ul>
         </div>
@@ -34,19 +34,19 @@
       <div class="favorites-container">
         <div class="fav-names">
           <h2>Female Names</h2>
-          <ul  v-for="(name, index) in demoFemaleNames" :key="index">
+          <ul v-for="(name, index) in demoFemaleNames" :key="index">
             <li>{{ name }}</li>
           </ul>
         </div>
         <div class="fav-names">
           <h2>Male Names</h2>
-          <ul  v-for="(name, index) in demoMaleNames" :key="index">
+          <ul v-for="(name, index) in demoMaleNames" :key="index">
             <li>{{ name }}</li>
           </ul>
         </div>
         <div class="fav-names">
           <h2>Gender-Neutral Names</h2>
-          <ul  v-for="(name, index) in demoGNNames" :key="index">
+          <ul v-for="(name, index) in demoGNNames" :key="index">
             <li>{{ name }}</li>
           </ul>
         </div>
@@ -89,7 +89,7 @@ export default {
         axios.post('/remove-favorite', {id: name.id})
         this.clicks = 0;
         this.$router.go();
-      }        	     
+      }
     },
     getFavoritedNames() {
       axios.get('/favorited-names')
@@ -115,10 +115,10 @@ export default {
 
 <style scoped>
 .favorites-component {
-    padding-top: 20px;
+  padding-top: 20px;
 }
 h3 {
-    font-weight: normal;
+  font-weight: normal;
 }
 ul {
   list-style-type: none;
@@ -129,14 +129,14 @@ li {
   display: inline-block;
 }
 li:hover {
-    font-weight: bold;
+  font-weight: bold;
 }
 .favorites-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 .fav-names {
-    width: 18em;
+  width: 18em;
 }
 </style>

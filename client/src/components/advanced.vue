@@ -86,11 +86,11 @@ li {
   font-weight: bold;
 }
 .selected-movie-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 .selected-movie-info {
-    margin: 0 40px;
+  margin: 0 40px;
 }
 </style>
