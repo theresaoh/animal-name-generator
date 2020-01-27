@@ -41,12 +41,7 @@ Installation & Running Locally
 
 Seeding the Database
 --------------------
-- In the server file, open models.py
-- Uncomment lines 31-45 at the bottom of the file
-- `pipenv run python main.py`
-- Due to a known issue, the server will crash after the db has been seeded
-- Re-comment lines 31-45 in models.py
-- Continue with instructions above in Installation & Running Locally
+- In the server directory, run `pipenv run python seeds.py`
 
 Environment Variable Configuration
 ----------------------------------
