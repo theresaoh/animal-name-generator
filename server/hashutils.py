@@ -14,6 +14,4 @@ def make_pw_hash(salt, password):
 
 def check_pw_hash(salt, password, hash):
   # verify that the password entered by a user on login is the same as the secure pass in the db
-  if make_pw_hash(salt, password) == hash:
-      return True
-  return False
+  return make_pw_hash(salt, password) == hash
