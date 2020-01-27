@@ -59,18 +59,18 @@ export default {
     testDuplicateUser(){
       // before adding a new user to DB, make sure that username isn't already taken
       axios.post('/duplicate-user-test', { username: this.username })
-      .then(resp => {
-        if (resp.data.does_the_user_exist.length == 0){
+        .then(resp => {
+          if (resp.data.does_the_user_exist.length == 0){
           // if the length of response is 0, the user doesn't exist - test the password validity
-          this.passwordMeetsRequirements();
-        } else {
+            this.passwordMeetsRequirements();
+          } else {
           // otherwise, display an error
-          this.duplicateUserErrorMessage = "Sorry, that username already exists."
-          this.username = '';
-          this.password = '';
-          this.confirmPassword = '';
-        }
-      })
+            this.duplicateUserErrorMessage = "Sorry, that username already exists."
+            this.username = '';
+            this.password = '';
+            this.confirmPassword = '';
+          }
+        })
     },
     addNewUser() {
       // add a new user to the DB, log them in, and redirect to the home page

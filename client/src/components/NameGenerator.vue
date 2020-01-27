@@ -77,15 +77,15 @@ export default {
       this.successMessage = '';
       this.duplicateNameErrorMessage = '';
       axios.post('/duplicate-name-test', { name: this.inputValue, gender: this.addNameGender })
-      .then(resp => {
-        if (resp.data.does_the_name_exist.length == 0){
+        .then(resp => {
+          if (resp.data.does_the_name_exist.length == 0){
           // if the response from the database has a length of 0, the name doesn't exist and should be added
-          this.addName();
-        } else {
-          this.duplicateNameErrorMessage = "That name already exists in the database."
-          this.inputValue = '';
-        }
-      })
+            this.addName();
+          } else {
+            this.duplicateNameErrorMessage = "That name already exists in the database."
+            this.inputValue = '';
+          }
+        })
     },
     nameAlreadySetAside(name){
       // before setting aside a name in the "Liked Names" section of the page, make sure they're not already set aside
@@ -104,16 +104,16 @@ export default {
         this.timer = setTimeout(() => {
           self.clicks = 0
           this.nameAlreadySetAside(name);
-          }, this.delay);
-        } else {
-          // if a user double-clicks during the timeout period AND is currently logged in, user favorites the name
-          if (!this.$parent.loggedIn){
-            return;
-          }
-          clearTimeout(this.timer);
-          this.favoriteName(name);
-          this.clicks = 0;
-        }        	     
+        }, this.delay);
+      } else {
+        // if a user double-clicks during the timeout period AND is currently logged in, user favorites the name
+        if (!this.$parent.loggedIn){
+          return;
+        }
+        clearTimeout(this.timer);
+        this.favoriteName(name);
+        this.clicks = 0;
+      }        	     
     },
     setAside(name) {
       // set aside a name in the "Liked Names" section

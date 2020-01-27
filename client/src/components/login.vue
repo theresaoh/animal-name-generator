@@ -33,23 +33,23 @@ export default {
   methods: {
     login() {
       axios.post('/login', {username: this.username, password: this.password})
-      .then((resp) => {
-        if (resp.data.success == false){
+        .then((resp) => {
+          if (resp.data.success == false){
           // if the response is a failure, the password wasn't correct - display an error
-          this.error = "Your password was entered incorrectly. Try again.";
-          return;
-        } if (resp.data === "None") {
+            this.error = "Your password was entered incorrectly. Try again.";
+            return;
+          } if (resp.data === "None") {
           // if the response is 'None', the username entered isn't valid - display an error
-          this.error = "There's no user with that username. Please try again, or register as a new user."
-          return;
-        } else {
+            this.error = "There's no user with that username. Please try again, or register as a new user."
+            return;
+          } else {
           // otherwise, change the status of $parent.loggedIn and redirect to homepage
-          this.username = '';
-          this.password = '';
-          this.$parent.loggedIn = true;
-          this.$router.push('/');
-        }
-      });
+            this.username = '';
+            this.password = '';
+            this.$parent.loggedIn = true;
+            this.$router.push('/');
+          }
+        });
     }
   }
 }
