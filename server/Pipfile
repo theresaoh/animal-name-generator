@@ -10,7 +10,6 @@ flask = "*"
 flask-sqlalchemy = "*"
 pandas = "*"
 psycopg2-binary = "*"
-python-dotenv = "*"
 requests = "*"
 gunicorn = "*"
 
