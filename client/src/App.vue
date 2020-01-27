@@ -3,15 +3,15 @@
     <div class="nav-bar">
     <!-- Navigation bar -->
       <router-link class="nav-bar-elem" :to="'/'"><button>Home</button></router-link>
-      <div v-if="!this.loggedIn">
+      <template v-if="!this.loggedIn">
         <router-link class="nav-bar-elem" :to="'/login'"><button>Log In</button></router-link>
         <router-link class="nav-bar-elem" :to="'/register'"><button>Register</button></router-link>
-      </div>
+      </template>
         <router-link class="nav-bar-elem" :to="'/favorites'"><button>Favorites</button></router-link>
         <router-link class="nav-bar-elem" :to="'/advanced'"><button>Movie Names</button></router-link>
-      <div v-if="this.loggedIn">
+      <template v-if="this.loggedIn">
           <button class="nav-bar-elem" @click="logout()">Log Out</button>
-      </div>
+      </template>
     </div>
     <router-view></router-view>
   </div>

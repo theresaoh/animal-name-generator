@@ -1,6 +1,6 @@
 <template>
   <div class="login-contents">
-    <div v-if="!this.$parent.loggedIn">
+    <template v-if="!this.$parent.loggedIn">
     <!-- if there's not currently a user logged in, allow them to log in -->
       <h1>Login</h1>
       <p>Username:</p><input v-model="username" type="text" />
@@ -10,11 +10,11 @@
       <div class="error">{{ error }}</div>
       <p>Not yet registered?</p>
       <router-link :to="'/register'"><button>Register</button></router-link>
-    </div>
-    <div v-if="this.$parent.loggedIn"> 
+    </template>
+    <template v-else> 
     <!-- if the user is already logged in, tell them -->
       <h1>You're already logged in.</h1>
-    </div>
+    </template>
   </div>
 </template>
 

@@ -24,13 +24,13 @@
         </ul>
       </div>
     </div>
-    <div v-if="this.setAsideNames.length > 0">
+    <template v-if="this.setAsideNames.length > 0">
       <hr>
       <h1 class="liked-title">Liked Names</h1>
       <ul>
         <li class="liked-names-list" v-for="name in this.setAsideNames" :key="name.id">{{ name }}</li>
       </ul>
-    </div>
+    </template>
     <hr>
     <!-- Add a Name Section -->
     <h1>Add a Name</h1>

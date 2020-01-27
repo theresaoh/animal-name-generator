@@ -1,6 +1,6 @@
 <template>
   <div class="favorites-component">
-    <div v-if="this.$parent.loggedIn">
+    <template v-if="this.$parent.loggedIn">
     <!-- If a user is logged in, show their favorites -->
       <h1>Favorited Names</h1>
       <h3><b>Double-click</b> on a name to un-favorite it.</h3>
@@ -24,8 +24,8 @@
           </ul>
         </div>
       </div>
-    </div>
-    <div v-if="!this.$parent.loggedIn">
+    </template>
+    <template v-if="!this.$parent.loggedIn">
     <!-- if a user is not logged in, entice them to register by demonstrating favorites functionality -->
       <h1>Sorry, you must be logged in to view your favorited names.</h1>
       <h2>Registering and logging in gives you the ability to favorite the names you like the most and view them at any time, like this:</h2>
@@ -51,7 +51,7 @@
           </ul>
         </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 

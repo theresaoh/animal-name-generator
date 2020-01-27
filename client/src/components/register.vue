@@ -1,6 +1,6 @@
 <template>
   <div class="register-component">
-    <div v-if="this.$parent.loggedIn == false">
+    <template v-if="this.$parent.loggedIn == false">
     <!-- if a user isn't currently logged in, allow them to register -->
       <h1>Register</h1>
       <p>Username:</p><input v-model="username" type="text" />
@@ -12,11 +12,11 @@
       <button @click="testDuplicateUser()">Register</button>
       <p>Already a registered user?</p>
       <router-link :to="'/login'"><button>Log In</button></router-link>
-    </div>
-    <div v-else>
+    </template>
+    <template v-else>
     <!-- if a user is already logged in, tell them -->
       <h1>You're already logged in.</h1>
-    </div>
+    </template>
   </div>
 </template>
 
