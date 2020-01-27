@@ -37,24 +37,23 @@ def get_movie_credits():
 
 @names_api.route('/male-names', methods=['GET'])
 def serve_male_names():
-    # serve 10 random male names to an API endpoint
-    name_instances = db.session.query(Name).filter(Name.gender == "M").order_by(func.random()).limit(10)
-    name_results = [{"id": name.id, "name": name.name, "gender": name.gender} for name in name_instances]
-    return jsonify({"name": name_results})
+  return get_names_by_gender("M")
+
 
 @names_api.route('/female-names', methods=['GET'])
 def serve_female_names():
-    # serve 10 random female names to an API endpoint
-    name_instances = db.session.query(Name).filter(Name.gender == "F").order_by(func.random()).limit(10)
-    name_results = [{"id": name.id, "name": name.name, "gender": name.gender} for name in name_instances]
-    return jsonify({"name": name_results})
+  return get_names_by_gender("F")
+
 
 @names_api.route('/gender-neutral-names', methods=['GET'])
 def serve_gender_neutral_names():
-    # serve 10 random gender-neutral names to an API endpoint
-    name_instances = db.session.query(Name).filter(Name.gender == "GN").order_by(func.random()).limit(10)
-    name_results = [{"id": name.id, "name": name.name, "gender": name.gender} for name in name_instances]
-    return jsonify({"name": name_results})
+  return get_names_by_gender("GN")
+
+def get_names_by_gender(gender):
+  # return 10 random gender-specific names
+  name_instances = db.session.query(Name).filter(Name.gender == gender).order_by(func.random()).limit(10)
+  name_results = [{"id": name.id, "name": name.name, "gender": name.gender} for name in name_instances]
+  return jsonify({"name": name_results})
 
 @names_api.route('/name', methods=['POST'])
 def add_name():
