@@ -9,14 +9,14 @@ with app.app_context():
 
         # Read CSV (Names.csv) with Pandas
         with open(csv_file_path, 'r') as file:
-        df = pd.read_csv(file)
+                df = pd.read_csv(file)
 
-        # Insert to DB
-        df.to_sql('name_table',
-        con=engine,
-        index_label='id',
-        if_exists='append',
-        chunksize=100
-        )
+                # Insert to DB
+                df.to_sql('name_table',
+                con=engine,
+                index_label='id',
+                if_exists='append',
+                chunksize=100
+                )
         
         
