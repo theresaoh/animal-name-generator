@@ -2,10 +2,8 @@
   <div id="app">
     <div class="nav-bar">
     <!-- Navigation bar -->
-      <div v-if="this.$route.path != '/'">
-        <router-link class="nav-bar-elem" :to="'/'"><button>Home</button></router-link>
-      </div>
-      <div v-if="this.displayLoginRegisterButtons">
+      <router-link class="nav-bar-elem" :to="'/'"><button>Home</button></router-link>
+      <div v-if="!this.loggedIn">
         <router-link class="nav-bar-elem" :to="'/login'"><button>Log In</button></router-link>
         <router-link class="nav-bar-elem" :to="'/register'"><button>Register</button></router-link>
       </div>
@@ -69,16 +67,6 @@ export default {
       // these lines ensure that the promise resolves before adjusting the value of this.loggedIn (accounts for asynch)
       let result = await promise;
       return result;
-    }
-  },
-  computed: {
-    displayLoginRegisterButtons(){
-      // determines if login or register buttons should be shown based on current path and this.loggedIn status
-      if (this.$route.path != '/login' && !this.loggedIn){
-        return true;
-      } else {
-        return false;
-      }
     }
   },
   mounted() {
