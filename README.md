@@ -51,10 +51,6 @@ Within the `server` folder, create a file called `.env`. In it, fill in the foll
     API_ROOT = **https://api.themoviedb.org/3**  
     API_TOKEN = **register for a api_key with the API above and enter it here**  
 
-Known Issues
-------------
-- Seeds.py file doesn't work as it should; database seed instructions currently are inelegant and should be improved
-
 Next Steps
 ----------
 Here are some features I'd like to add in the future:  
