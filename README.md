@@ -28,7 +28,6 @@ Installation & Running Locally
 - `cd animal-name-generator`
 - Open another terminal tab
 - *In one tab:*
-    - `mkdir db`
     - `cd server`
     - `pipenv install`
     - `touch .env`
